@@ -23,10 +23,10 @@ class Autokms extends Controller
             <td>$value->Datum</td>
             <td>$value->kmstand</td>
             <td>
-            <a href='" . URLROOT . "/overzicht/update/$value->Auto'><i class='fa fa-pencil'></i></a>
+            <a href='" . URLROOT . "/Autokm/kmInvoeren/$value->kmstand'><i class='fa fa-pencil'>update</i></a>
             </td> 
             <td>
-            <a href='" . URLROOT . "/overzicht/delete/$value->Auto'><i class='fa fa-trash'>delete</i></a>
+            <a href='" . URLROOT . "/overzicht/delete/$value->kmstand'><i class='fa fa-trash'>delete</i></a>
             </td>
             <tr>
             ";
@@ -108,8 +108,8 @@ class Autokms extends Controller
     {
         $records = "";
         foreach ($this->model("Autokm")->getSingleKm() as $record) {
-            $selected = ($info == $record->Auto_Model) ? "selected" : ""; //check if the category is the one we have selected
-            $records .= "<option value = '" . $record->Auto_Model . "'" . $selected . ">" . $record->Auto_Model .  "</option>";
+            $selected = ($info == $record->kmstand) ? "selected" : ""; //check if the category is the one we have selected
+            $records .= "<option value = '" . $record->kmstand . "'" . $selected . ">" . $record->kmstand .  "</option>";
         }
         return $records;
     }
