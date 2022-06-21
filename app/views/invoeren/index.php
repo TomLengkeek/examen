@@ -16,7 +16,7 @@
 
     <div class="container">
         <div class="row">
-            <h1 id="overzichtje">Garagepark ...</h1>
+            <h1 id="overzichtje">Auto Kilometerstanden</h1>
         </div>
         <a id="linkje" href="<?= URLROOT; ?>/AutoOverzichten/CreateAuto"><button style="" class="btn btn-primary btn-lg active"> Voeg een auto Toe</button></a>
         <a id="linkje" href="<?= URLROOT; ?>/Autokms/indexKilometers"><button style="" class="btn btn-primary btn-lg active"> Kilometers toevoegen</button></a>

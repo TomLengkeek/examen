@@ -23,7 +23,7 @@ class Autokms extends Controller
             <td>$value->Datum</td>
             <td>$value->kmstand</td>
             <td>
-            <a href='" . URLROOT . "/Autokms/kmInvoeren/$value->kmstand'><i class='fa fa-pencil'>update</i></a>
+            <a href='" . URLROOT . "/Autokms/kmInvoeren/$value->id'><i class='fa fa-pencil'>update</i></a>
             </td>
             <tr>
             ";
@@ -87,13 +87,17 @@ class Autokms extends Controller
 
                 // maakt met de kilometermodel conn om de  getsingle te krijgen
                 $row = $this->kilometerModel->getSingleKm($id);
-                var_dump($row);
-                //exit();
+
+                //  var_dump($row);
+                //exit()
                 // als row variabele niet empty zijn dan..
                 if (!empty($row)) {
+                    echo ("ik ben hier in de if");
+                    $data = ['row' => $row];
+                    $this->view("invoeren/update", $data);
 
                     // function voor kmselector die je oproept om hierin te werken
-                    // $records = $this->kmSelector($row->kmstand, $id);
+                    //  $records = $this->kmSelector($row->kmstand, $id);
                 } else {
                     // anders stuurt die je naar de index
                     header("Location: " . URLROOT . "./Autokms/index");
@@ -113,13 +117,13 @@ class Autokms extends Controller
             $data = [
                 'title' => "<h1>Update Km</h1>",
                 'row' => $row
-                //  'records' => $records
+                // 'records' => $records
 
             ];
         }
 
         //laad de update km stand pagina
-        $this->view("invoeren/update", $data);
+
     }
 
 

@@ -24,7 +24,7 @@ class Autokm
         // exit();
         $this->db->query("SELECT kmstanden.Auto, Auto.Type
         FROM kmstanden
-        INNER JOIN Auto ON kmstanden.Auto = Auto.Auto;");
+        INNER JOIN Auto ON kmstanden.Auto = Auto.Auto");
 
 
         $this->db->bind(':id', $id, PDO::PARAM_INT);
@@ -36,11 +36,19 @@ class Autokm
 
     public function updateKmStand($post)
     {
-        $this->db->query("UPDATE kmstanden
-                        SET kmstand = :kmstand
-                        WHERE id = :id");
+        // var_dump($_POST);exit();
+
+        var_dump($post["id"]);
+
+        var_dump($post["kmstand"]);
+
+        exit();
+
+        $this->db->query("UPDATE kmstanden SET kmstand = :kmstand WHERE id = :id");
 
         $this->db->bind(':kmstand', $post["kmstand"], PDO::PARAM_INT);
+        $this->db->bind(':id', $post["id"], PDO::PARAM_INT);
+
 
         return $this->db->execute();
     }
