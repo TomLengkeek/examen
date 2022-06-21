@@ -23,7 +23,7 @@ class Autokms extends Controller
             <td>$value->Datum</td>
             <td>$value->kmstand</td>
             <td>
-            <a href='" . URLROOT . "/Autokm/kmInvoeren/$value->kmstand'><i class='fa fa-pencil'>update</i></a>
+            <a href='" . URLROOT . "/Autokms/kmInvoeren/$value->kmstand'><i class='fa fa-pencil'>update</i></a>
             </td> 
             <td>
             <a href='" . URLROOT . "/overzicht/delete/$value->kmstand'><i class='fa fa-trash'>delete</i></a>
@@ -61,15 +61,15 @@ class Autokms extends Controller
             if (!$this->validate(['kmstand'])) {
 
                 echo "Het veranderen van de kmstand is niet gelukt";
-                header("Refresh:2; url=" . URLROOT .  "/Autokm/index/creating-failed");
+                header("Refresh:2; url=" . URLROOT .  "/Autokms/index/creating-failed");
             } else {
                 try {
 
                     filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                     $this->kilometerModel->updateKmStand($_POST);
-                    header("Location: " . URLROOT . "./Autokm/index/update-succes");
+                    header("Location: " . URLROOT . "./Autokms/index/update-succes");
                 } catch (PDOException $e) {
-                    header("Location: " . URLROOT . "./overzicht/index/update-failed");
+                    header("Location: " . URLROOT . "./Autokms/index/update-failed");
                 }
             }
         } else {
@@ -84,12 +84,12 @@ class Autokms extends Controller
                     $records = $this->kmSelector($row->kmstand);
                 } else {
 
-                    header("Location: " . URLROOT . "./Autokm/index");
+                    header("Location: " . URLROOT . "./Autokms/index");
                 }
             } catch (PDOException $e) {
 
                 echo $e->getMessage();
-                header("Location: " . URLROOT . "./Autokm/index");
+                header("Location: " . URLROOT . "./Autokms/index");
             }
             $data = [
                 'title' => "<h1>Update Km</h1>",
