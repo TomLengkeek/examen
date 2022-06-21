@@ -18,15 +18,13 @@
 
         .card{
             margin-top:20px;
-        }
-
-        
+        }        
     </style>
     <link rel="stylesheet" href="<?php URLROOT ?>/public/css/style.css">
 </head>
 
 <body>
-    <?php show_message("instructeur/read", $data["alert"]) ?>
+    <?php show_message("/instructeur/Vread", $data["alert"]) ?>
     <div class="row">
             <?=$data["records"]; ?>
     </div>

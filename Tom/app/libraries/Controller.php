@@ -3,13 +3,13 @@
 
 class Controller{
     //create an instance of the given model class
-    public function model($model){
+    protected function model($model){
         require_once '../app/models/' . $model . '.php';
 
         return new $model;
     }
     //load the view check for the file
-    public function view($view, $data = []){
+    protected function view($view, $data = []){
         if(file_exists('../app/views/' . $view . '.php')){
             require_once '../app/views/' . $view . '.php';
         }
@@ -18,10 +18,10 @@ class Controller{
         }
     }
     // checks if any of the given values are empty in the post array.
-    protected function validate($values = []){
+    public function validate($values = []){
         $validated = true;
         foreach($values as $value){
-            if(empty($_POST[$value])){
+            if(empty(trim($_POST[$value]))){
                 $validated = false;
                 break;
             }

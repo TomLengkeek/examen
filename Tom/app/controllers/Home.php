@@ -17,7 +17,7 @@ Class Home extends Controller {
     public function login(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST["name"] == "instructeur"){
-                header("Location: " . URLROOT . "/instructeur/index");
+                header("Location: " . URLROOT . "/instructeur/Vindex");
             }else if($_POST["name"] == "rijschoolhouder"){
                 header("Location: " . URLROOT . "/rijschoolhouder/index");
             }

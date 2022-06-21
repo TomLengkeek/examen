@@ -36,12 +36,11 @@
         <section>
             <h2>Commentaar toevoegen</h1>
             <form action="<?=URLROOT?>/instructeur/Vcomment" method="POST">
-                <textarea name="comment" cols="30" rows="10"><?php
+                <textarea name="opmerking" cols="30" rows="10"><?php
                     if($data["status"]){
                         echo $data["result"]->opmerking;
                     }
-                    ?>
-                </textarea>
+                    ?></textarea>
                 <input type="hidden" name="id" value="<?php
                     if($data["status"]){
                         echo $data["result"]->id;
@@ -50,7 +49,6 @@
                     }
                     ?>">
                 <input type="hidden" name="status" value="<?=$data["status"]?>">
-                <input type="hidden" name="lesson" value=">
                 <button class="btn btn-success">Versturen</button>
             </form>
         </section>

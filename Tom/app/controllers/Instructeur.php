@@ -12,7 +12,7 @@ class Instructeur extends Controller{
     }
 
     //page with a button to redirect to read page
-    public function index(){
+    public function Vindex(){
         $this->view("Instructeur/index");
     }
 
@@ -29,10 +29,15 @@ class Instructeur extends Controller{
                              </div>';
                      break;
                  case "success":
-                     $alert .=  '<div class="alert alert-danger" style="text-align: center;" role="alert">
+                     $alert .=  '<div class="alert alert-success" style="text-align: center;" role="alert">
                                  opmerking toegevoegd
                              </div>';
                      break;
+                case "gefaald":
+                $alert .=  '<div class="alert alert-danger" style="text-align: center;" role="alert">
+                            opmerking niet toegevoegd probeer opnieuw
+                        </div>';
+                break;
                  default:
                      break;
              }
@@ -67,38 +72,47 @@ class Instructeur extends Controller{
         ];
         $this->view("instructeur/read",$data);
     }
+
+
     //function for updating or inserting a comment
-    public function Vcomment($id){
+    public function Vcomment($id = null){
         //check if we have entered the page with post variables
-        if($_SERVER["REQUEST_METHOD"]== "POST"){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
             //check if we have filled in the comment
-            if(!$this->validate(["comment"])){
-                header("location: " . URLROOT . "/instructeur/read/opmerking-toevoegen");
+           
+            if(empty($_POST["opmerking"])){
+                header("location: " . URLROOT . "/instructeur/Vread/opmerking-toevoegen");
+                exit();
             }
             //if there is no comment already we want to make one otherwise update it
             try{
+                $this->opmerkingModel->opmerking = $_POST["opmerking"];
+
                 if($_POST["status"] == false){
-                    $this->opmerkingModel->les = $id;
-                    $this->opmerkingModel->opmerking = sanitize($_POST["comment"]);
+                    $this->opmerkingModel->les = $_POST["id"];
                     $this->opmerkingModel->insert();
+                    
                 }else{
+                    $this->opmerkingModel->id = $_POST["id"];
                     $this->opmerkingModel->update();
                 }
+                //everything worked out
+                header("location: " . URLROOT . "/instructeur/Vread/success");
             }catch(PDOException $e){
-
+                header("location: " . URLROOT . "/instructeur/Vread/gefaald");
             }
         }
         $result = null;
-
+        //get the comment if there is one
         try{
             $this->opmerkingModel->les = $id;
             $result = $this->opmerkingModel->getSingle();
         }catch(PDOException $e){
             $records = "";
         }
-
+        //if there is no comment we want to update later otherwise create
         $status = false;
-        if($result->opmerking){
+        if($result){
             $status = true;
         }
 
