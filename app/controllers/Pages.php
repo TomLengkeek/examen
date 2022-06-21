@@ -9,6 +9,6 @@ class Pages extends Controller {
             'title' => 'Home page'
         ];
 
-        $this->view('index', $data);
+        $this->view('home/index', $data);
     }
 }

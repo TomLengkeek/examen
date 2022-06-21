@@ -1,0 +1,50 @@
+<?php
+class Mededeling 
+{
+    
+    // Properties, fields
+    private $db;
+
+    //constructor voor database
+    public function __construct(){
+        try 
+        {    
+            $this->db = new Database();
+
+            //echo "connectie met database gelukt";
+        } 
+        catch (Exception $e) 
+        {
+            echo "connectie met database niet gelukt" . $e->getMessage();
+        }
+    }
+    
+    //deze functie haalt alles op uit het wagenpark database en sorteers de date op kenteken
+    public function getLeerlingen()
+    {
+        $this->db->query("SELECT * FROM leerlingen ORDER BY naam ASC");
+        return $this->db->resultSet();
+    }
+
+    public function getInstructeurs()
+    {
+        $this->db->query("SELECT * FROM instructeurs ORDER BY naam ASC");
+        return $this->db->resultSet();
+    }
+
+    public function addMededelingLeerling($new, $old, $post) {
+
+        $this->db->query("UPDATE leerling SET mededeling = :WHERE Email = :old");
+
+        $this->db->bind(':new', $new);
+        $this->db->bind(':old',$old);
+        $this->db->bind(':Voornaam', $post["Voornaam"]);
+        $this->db->bind(':Tussevoegsel', $post["Tussevoegsel"]);
+        $this->db->bind(':Achternaam', $post["Achternaam"]);
+        $this->db->bind(':Klas', $post["Klas"]);
+        $this->db->bind(':Studentnummer', $post["Studentnummer"]);
+
+        $this->db->execute();
+
+    }
+}
