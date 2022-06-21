@@ -20,8 +20,16 @@ class Autokm
     // get single om enkel km te roepen
     public function getSingleKm($id)
     {
-        $this->db->query("SELECT * FROM kmstanden WHERE id = :id");
+        //echo $id;
+        // exit();
+        $this->db->query("SELECT kmstanden.Auto, Auto.Type
+        FROM kmstanden
+        INNER JOIN Auto ON kmstanden.Auto = Auto.Auto;");
+
+
         $this->db->bind(':id', $id, PDO::PARAM_INT);
+        //var_dump($this->db->single());
+        //exit();
         return  $this->db->single();
     }
 

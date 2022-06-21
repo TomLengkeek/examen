@@ -24,23 +24,22 @@ class Autokms extends Controller
             <td>$value->kmstand</td>
             <td>
             <a href='" . URLROOT . "/Autokms/kmInvoeren/$value->kmstand'><i class='fa fa-pencil'>update</i></a>
-            </td> 
-            <td>
-            <a href='" . URLROOT . "/overzicht/delete/$value->kmstand'><i class='fa fa-trash'>delete</i></a>
             </td>
             <tr>
             ";
         }
+
+        // data variabelen voor de tablerow
         $data = [
-            'title' => 'Home page',
             'data' => $tablesRow
         ];
 
+        // this view om de invoeren/index pagina te laden
         $this->view('invoeren/index', $data);
     }
 
 
-
+    // validate functie die checkt of iets true of false, leeg of gevuld zijn als validator
     public function validate($values = [])
     {
         $validate = true;
@@ -56,7 +55,8 @@ class Autokms extends Controller
 
     public function kmInvoeren($id = null)
     {
-
+        // echo "slskdjlkf" . $id;
+        // exit();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$this->validate(['kmstand'])) {
 
@@ -65,49 +65,69 @@ class Autokms extends Controller
             } else {
                 try {
 
+                    // sanitize voor speciale characters zodat het veiliger is
                     filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                    // conn met de model om de updateKmStand aan te roepen in de moddel en te vuren
                     $this->kilometerModel->updateKmStand($_POST);
+
+                    // succes message voor als het km aanpassen gelukt is
                     header("Location: " . URLROOT . "./Autokms/index/update-succes");
+
+                    //catch voor de errorafhandeling
                 } catch (PDOException $e) {
-                    header("Location: " . URLROOT . "./Autokms/index/update-failed");
+
+                    // header location om je terug te sturen als het niet gelukt is met de update failed
+                    header("Location: " . URLROOT . "./Autokms/index/invoeren-failed");
                 }
             }
         } else {
 
             try {
 
+                // maakt met de kilometermodel conn om de  getsingle te krijgen
                 $row = $this->kilometerModel->getSingleKm($id);
-
+                var_dump($row);
+                //exit();
+                // als row variabele niet empty zijn dan..
                 if (!empty($row)) {
 
-                    // function voor fillselector die je oproept om hierin te werken
-                    $records = $this->kmSelector($row->kmstand);
+                    // function voor kmselector die je oproept om hierin te werken
+                    // $records = $this->kmSelector($row->kmstand, $id);
                 } else {
-
+                    // anders stuurt die je naar de index
                     header("Location: " . URLROOT . "./Autokms/index");
                 }
+
+                // catch voor error afhandelingen
             } catch (PDOException $e) {
 
+                // redirect naar de index page als het misgaat
                 echo $e->getMessage();
+
+                // redirect voor als er een foutje optreed
                 header("Location: " . URLROOT . "./Autokms/index");
             }
+
+            //variabele data waarin ik een benamingen opsla met een function eraan
             $data = [
                 'title' => "<h1>Update Km</h1>",
-                'row' => $row,
-                'records' => $records
+                'row' => $row
+                //  'records' => $records
 
             ];
-
-            $this->view("invoeren/update", $data);
         }
+
+        //laad de update km stand pagina
+        $this->view("invoeren/update", $data);
     }
 
 
 
-    public function kmSelector($info = '')
+    public function kmSelector($info = '', $id)
     {
         $records = "";
-        foreach ($this->model("Autokm")->getSingleKm() as $record) {
+        foreach ($this->model("Autokm")->getSingleKm($id) as $record) {
             $selected = ($info == $record->kmstand) ? "selected" : ""; //check if the category is the one we have selected
             $records .= "<option value = '" . $record->kmstand . "'" . $selected . ">" . $record->kmstand .  "</option>";
         }
