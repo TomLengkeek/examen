@@ -25,6 +25,12 @@ class AutoOverzichten extends Controller
                     $alert .= '<div class="alert alert-success" role="alert">
                     Auto verwijdert!
                     </div>';
+                    break;
+                case 'creating-succes':
+                    $alert .= '<div class="alert alert-success" role="succes">
+                    Auto Toegevoegd
+                    </div>';
+                    break;
             }
         }
 
@@ -41,6 +47,7 @@ class AutoOverzichten extends Controller
             <td>$value->Auto_Model</td>
             <td>$value->Auto_Kleur</td>
             <td>$value->Transmissie_Naam</td>
+            <td>$value->Kilometerstand</td>
             <td>$value->Auto_Nummer</td>
             <td>$value->Beschikbaar</td>
             <td>$value->Date_Create</td>
@@ -84,9 +91,9 @@ class AutoOverzichten extends Controller
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            if (!$this->validate(['Auto_Type',  'Auto_Model', 'Auto_Kleur', 'Transmissie_Naam', 'Auto_Nummer', 'Beschikbaar',])) {
+            if (!$this->validate(['Auto_Type',  'Auto_Model', 'Auto_Kleur', 'Transmissie_Naam', 'Kilometerstand', 'Auto_Nummer', 'Beschikbaar'])) {
 
-                // message voor als het niet lukt
+                // message voor als het niet lukt om een auto aan te maken.
                 echo "het aanmaken van een nieuwe lesauto is niet gelukt";
                 header("Refresh:2; url=" . URLROOT .  "/AutoOverzichten/index/creating-failed");
             } else {
@@ -103,6 +110,8 @@ class AutoOverzichten extends Controller
 
                     // catch rolt hem door als er binnen de try een fout heeft plaatsgevonden. vervolgens refresht die de url
                 } catch (PDOException $e) {
+                    var_dump($e->getMessage());
+                    exit();
                     echo "het aanmaken van je auto is niet gelukt";
                     header("Refresh:5; url=" . URLROOT .  "/AutoOverzichten/index/creating-failed");
                 }
@@ -135,7 +144,6 @@ class AutoOverzichten extends Controller
         }
         return $records;
     }
-
 
 
 

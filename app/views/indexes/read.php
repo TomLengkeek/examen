@@ -12,23 +12,25 @@
 
 <body>
 
-    <a id="linkje" style="padding-left: 150px;" href="<?= URLROOT; ?>/AutoOverzichten/CreateAuto"><button style="" class="btn btn-primary btn-lg active"> Create Auto</button></a>
+
     <?= $data["alert"]; ?>
     <div class="container">
         <div class="row">
             <h1 id="overzichtje">Garagepark ...</h1>
         </div>
+        <a id="linkje" href="<?= URLROOT; ?>/AutoOverzichten/CreateAuto"><button style="" class="btn btn-primary btn-lg active"> Voeg een auto Toe</button></a>
         <div class="row">
             <div class="col">
                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Auto_Id</th>
-                            <th scope="col">Auto_Type</th>
-                            <th scope="col">Auto_Model</th>
-                            <th scope="col">Auto_Kleur</th>
-                            <th scope="col">Transmissie_Naam</th>
-                            <th scope="col">Auto_Nummer</th>
+                            <th scope="col">Id</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Kleur</th>
+                            <th scope="col">Transmissie</th>
+                            <th scope="col">Kilometerstand</th>
+                            <th scope="col">AutoNummer</th>
                             <th scope="col">Beschikbaar</th>
                             <th scope="col">Createdate</th>
                             <th scope="col">Updatedate</th>
@@ -43,6 +45,9 @@
             </div>
         </div>
     </div>
+
+
+
 
 
 
