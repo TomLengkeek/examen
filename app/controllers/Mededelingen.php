@@ -82,6 +82,7 @@ class Mededelingen extends Controller {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $this->mededelingModel->addMededelingLeerling($_POST["mededeling"], $_POST["old"]);
+                
                 header("Location: ". URLROOT ."mededelingen/index/updating-succes");
             } 
             else 
