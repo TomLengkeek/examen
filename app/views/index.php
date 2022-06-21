@@ -6,5 +6,4 @@ foreach ($data['users'] as $user) {
 }
 */
 ?>
-HOME PAGE
-<a href="<?=URLROOT;?>wagenparken/index">wagenpark overzicht</a>
+<a href="<?=URLROOT;?>wagenparken/index">wagenparktabel</a>

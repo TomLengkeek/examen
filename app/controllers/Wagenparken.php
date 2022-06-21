@@ -11,7 +11,7 @@ class Wagenparken extends Controller {
             $this->wagenparkModel = $this->model('Wagenpark');
             // var_dump($this->wagenparkModel);exit();
 
-            echo "construct met de model gelukt";
+            //echo "construct met de model gelukt";
         } 
         catch (Exception $e) 
         {
@@ -27,9 +27,9 @@ class Wagenparken extends Controller {
         $alert ="";
         if(!empty($message)){
             switch($message){
-                case "updating-succes":
+                case "data-failed":
                     $alert .= '<div class="alert alert-primary" role="alert">
-                    updating success
+                    data ophalen niet gelukt
                   </div>';
                 break;
             }
@@ -50,15 +50,26 @@ class Wagenparken extends Controller {
                                 <td>$value->datumOnderhoudsbeurt</td>
                             </tr>";
             }
+
+            if (empty($tbody)){
+                $alert .= '<div class="alert alert-primary" role="alert">
+                    data leeg
+                  </div>';
+            }
+        
             $data = [
                 'title' => "wagenpark",
                 'tbody' => $tbody,
                 'alert' => $alert
             ];
+    
             $this->view("wagenparken/index", $data);
+
+    
         } catch (PDOEXception $e) {
             echo "fetch failed" . $e->getMessage();
             //header("Refresh:3; url=" . URLROOT . "/home/index" );
+            header("Location: ". URLROOT ."studenten/data-failed");
         }
     }
 

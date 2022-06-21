@@ -19,7 +19,7 @@
         <div class="sidebar">
             <ul>
                 <?php
-                include(APPROOT . "/views/includes/sidenevbar.php");
+                require APPROOT . '/views/includes/sidenavbar.php';
                 ?>
             </ul>
         </div>
@@ -29,10 +29,16 @@
                 <div class="row">
                     <div class="col-md-12">
                         <?= $data["alert"] ?>
+                        <h1 class="text-center">Auto's</h1>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Auto's</th>
+                                    <th>kenteken</th>
+                                    <th>merk</th>
+                                    <th>type</th>
+                                    <th>kilometerstand</th>
+                                    <th>datumKeuring</th>
+                                    <th>datumOnderhoudsbeurt</th>
                                 </tr>
                             </thead>
                             <tbody>
