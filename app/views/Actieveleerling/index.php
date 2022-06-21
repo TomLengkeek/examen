@@ -22,11 +22,10 @@ if(!empty($data["alert"]))
  <a href="http://Examenopdracht/Actieveleerling/create" type= "button" style="float: right; margin-bottom : 20px;"class="btn btn-danger btn-lg btn-block"> Nieuwe record toevoegen</a><h1 style="margin-top : 20px; margin-bottom : 20px;">Overzicht van actieve leerlingen</h1>
  
 </div>
-<!--de tabel van gebruiker  -->
+<!--de tabel van actieve leerling  -->
   <table class="table">
   <thead>
     <tr>
-     
       <th scope="col">Voornaam</th>
       <th scope="col">Achternaam</th>
       <th scope="col">Email</th>

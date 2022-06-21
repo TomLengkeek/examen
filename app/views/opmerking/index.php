@@ -22,7 +22,7 @@ if(!empty($data["alert"]))
  <a href="http://Examenopdracht/opmerking/create" type= "button" style="float: right; margin-bottom : 20px;"class="btn btn-danger btn-lg btn-block"> Nieuwe record toevoegen</a><h1 style="margin-top : 20px; margin-bottom : 20px;">Overzicht van uw volgedaande lessen</h1>
  
 </div>
-<!--de tabel van gebruiker  -->
+<!--de tabel van leerling  -->
   <table class="table">
   <thead>
     <tr>
@@ -32,7 +32,6 @@ if(!empty($data["alert"]))
       <th scope="col">Onderdeel</th>
       <th scope="col">Les</th>
       <th scope="col">opmerkingen</th>
-      
     </tr>
   </thead>
   <tbody>

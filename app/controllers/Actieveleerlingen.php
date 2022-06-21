@@ -14,7 +14,7 @@ class Actieveleerlingen extends Controller{
     }
 // functie voor de index hier worden de records ingedaan
     public function index($message = ""){
-
+// Messages switch case voor fouten en succesvole messages
         $alert = "";
         switch($message){
             case "delete-succes":
@@ -46,15 +46,12 @@ class Actieveleerlingen extends Controller{
                 $alert = '<div class="alert alert-success" role="alert">
                 U record is SUCCESVOL toegevoegd
                 </div>';
-                break;
-            
+                break;   
         }
-       
         try{
             $records = "";
             foreach($this->ActieveLeerlingenModel->getAllactiveleerlingen() as $record){
                 $records .= '<tr>
-                
                 <td>'.$record->Voornaam . '</td>
                 <td>'.$record->Achternaam . '</td>
                 <td>'. $record->Email . '</td>
@@ -71,8 +68,6 @@ class Actieveleerlingen extends Controller{
             "records" => $records, 
             "alert" => $alert
         ];
-
-
         $this->view('Actieveleerling/index',$data);
     }
 
@@ -94,66 +89,6 @@ class Actieveleerlingen extends Controller{
         }catch(PDOException $e){
             Header("Location: " . URLROOT . "/Actieveleerlingen/index/delete-failed");
         }
-    }
-
-    // functie voor update waarbij als die geupdate word een melding krijgt
-    public function update($email = ""){
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $values = ["voornaam", "achternaam", "email", "oldemail"];
-            if(!$this->validate($values)){
-            Header("Location: " . URLROOT . "/Actieveleerling/index/update-failed");
-            }
-        
-            $this->ActieveLeerlingenModel->voornaam = $this->sanitize($_POST["voornaam"]);
-            $this->ActieveLeerlingenModel->achternaam = $this->sanitize($_POST["achternaam"]);
-            $this->ActieveLeerlingenModel->email = $this->sanitize($_POST["email"]);
-            $this->ActieveLeerlingenModel->oldemail = $this->sanitize($_POST["oldemail"]);
-
-
-            $this->ActieveLeerlingenModel->updateGebruiker();
-           Header("Location: " . URLROOT . "/Actieveleerling/index/update-succes");
-
-        }else{
-            try{
-                $this->ActieveLeerlingenModel->email = $email;
-               $result = $this->ActieveLeerlingenModel->getSingle();
-            }catch(PDOException $e){
-
-            }
-            $data = [
-                "info" => $result
-            ];
-          $this->view("ToDo/update",$data);
-        }       
-    }
-
-    //Functie voor create 
-    public function create($email = ""){
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $values = ["voornaam", "achternaam", "email"];
-            if(!$this->validate($values)){
-            Header("Location: " . URLROOT . "/Actieveleerling/index/create-failed");
-            }
-
-            $this->ActieveLeerlingenModel->voornaam = $this->sanitize($_POST["voornaam"]);
-            $this->ActieveLeerlingenModel->achternaam = $this->sanitize($_POST["achternaam"]);
-            $this->ActieveLeerlingenModel->email = $this->sanitize($_POST["email"]);
-
-            $id = $this->ActieveLeerlingenModel->createGebruiker($_POST);
-            Header("Location: " . URLROOT . "/Actieveleerling/index/create-succes");
-        }else{
-            try{
-                $this->ActieveLeerlingenModel->email = $email;
-               $result = $this->ActieveLeerlingenModel->getSingle();
-            }catch(PDOException $e){
-
-            }
-            $data = [
-                "info" => $result
-            ];
-          $this->view("Actieveleerling/create",$data);
-        }       
     }
     public function sayMyName($name)
     {

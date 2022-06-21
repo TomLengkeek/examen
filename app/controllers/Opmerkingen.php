@@ -59,7 +59,7 @@ class opmerkingen extends Controller{
                 <td>'.$record->Leerling . '</td>
                 <td>'. $record->Onderdeel . '</td>
                 <td>'. $record->Id . '</td>
-                <td><a href="' . URLROOT . 'opmerking/update/' . $record->Id .'"><button type="button" class="btn btn-success">Opmerking toevoegen</button></a></td>
+                <td><a href="' . URLROOT . 'opmerkingen/update/' . $record->Id .'"><button type="button" class="btn btn-success">Opmerking toevoegen</button></a></td>
                 </tr>';
             }
         }catch(PDOException $e){
@@ -75,13 +75,13 @@ class opmerkingen extends Controller{
     }
     
     // functie voor updaten, waarbij als die update word een melding krijgt 
-    public function update($Opmerking = ""){
+    public function update($Id = ""){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $values = ["Les","Opmerking","oldOpmerking"];
+            $values = ["Id","Opmerking","oldOpmerking"];
             if(!$this->validate($values)){
             Header("Location: " . URLROOT . "/opmerking/index/update-failed");
             }
-            $this->opmerkingModel->Les = $this->sanitize($_POST["Les"]);
+            $this->opmerkingModel->Id = $this->sanitize($_POST["Id"]);
             $this->opmerkingModel->Opmerking = $this->sanitize($_POST["Opmerking"]);
             $this->opmerkingModel->oldOpmerking = $this->sanitize($_POST["oldOpmerking"]);
             $this->opmerkingModel->updateopmerking();
@@ -89,8 +89,10 @@ class opmerkingen extends Controller{
 
         }else{
             try{
-                $this->opmerkingModel->Opmerking = $Opmerking;
-               $result = $this->opmerkingModel->getSingle();
+                //$this->opmerkingModel->Opmerking = $Opmerking;
+                //echo $Id;exit();
+               $result = $this->opmerkingModel->getSingle($Id);
+               //var_dump($result);exit();
             }catch(PDOException $e){
 
             }

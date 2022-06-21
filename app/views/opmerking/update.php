@@ -13,12 +13,12 @@
   <div class="mb-3">
 
 <!-- Kolom voor Opmerking-->
-    <label for="exampleInputOpmerking" class="form-label">Email address</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Opmerking" value="<?=$data["info"]->Opmerking ?>" required> 
+    <label for="exampleInputOpmerking" class="form-label">Opmerking</label>
+    <input type="text" class="form-control" id="Opmerking" aria-describedby="emailHelp" name="Opmerking" value="<?=$data["info"]->Opmerking ?>" required> 
   </div>
 <!-- kolom voor Les -->
-  <label for="exampleInputLes" class="form-label">Les</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Les" value="<?=$data["info"]->Les ?>" required> 
+  <label for="exampleInputLes" class="form-label">LesId</label>
+    <input type="text" class="form-control" id="Les" aria-describedby="emailHelp" name="Id" value="<?=$data["info"]->Id ?>" required> 
   </div>
 
   <input type="hidden" name="oldOpmerking" value="<?=$data["info"]->Opmerking ?>">
