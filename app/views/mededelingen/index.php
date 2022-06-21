@@ -36,7 +36,8 @@
                                     <th>email</th>
                                     <th>naam</th>
                                     <th>telefoonnummer</th>
-                                    <td><a href='" . URLROOT . "mededelingen/addmededeling/$value->email'>update</a></td>
+                                    <th>mededeling</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>

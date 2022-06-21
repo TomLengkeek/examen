@@ -7,7 +7,7 @@ class Mededelingen extends Controller {
     {
         try 
         {    
-            $this->wagenparkModel = $this->model('Mededeling');
+            $this->mededelingModel = $this->model('Mededeling');
             //echo "construct met de model gelukt";
         } 
         catch (Exception $e) 
@@ -36,15 +36,17 @@ class Mededelingen extends Controller {
         }
 
         try {
-            $wagenparken = $this->wagenparkModel->getLeerlingen();
+            $Mededelingen = $this->mededelingModel->getLeerlingen();
             // var_dump($wagenparken);exit();
 
             $tbody = "";
-            foreach ($wagenparken as $value) {
+            foreach ($Mededelingen as $value) {
                 $tbody .= "<tr>
                                 <td>$value->email</td>
                                 <td>$value->naam</td>
                                 <td>$value->telefoonnummer</td>
+                                <td>$value->mededeling</td>
+                                <td><a href='" . URLROOT . "mededelingen/addmededeling/$value->email'>mededeling toevoegen</a></td>
                             </tr>";
             }
 
@@ -70,22 +72,32 @@ class Mededelingen extends Controller {
         }
     }
 
-    public function addmededeling()
+    public function addMededeling($email = null)
     {
         //var_dump($omschrijving);exit();
         
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $this->categoryModel->updateCategory($_POST["omschrijving"], $_POST["old"]);
-            header("Location: ". URLROOT ."/Mededelingen/index/updating-succes");
-        } else {
-            $row = $this->categoryModel->getSingleCategory($omschrijving);
-
-            $data = [
-                "row" => $row
-            ];
-
-            $this->view("categories/update", $data);
+        try
+        {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $this->mededelingModel->addMededelingLeerling($_POST["mededeling"], $_POST["old"]);
+                header("Location: ". URLROOT ."mededelingen/index/updating-succes");
+            } 
+            else 
+            {
+                $row = $this->mededelingModel->getSingleLeerlingen($email);
+    
+                $data = [
+                    "row" => $row
+                ];
+    
+                $this->view("mededelingen/addMededelingLeerling", $data);
+            }
+        }
+        catch (PDOEXception $e)
+        {
+            echo "fetch failed" . $e->getMessage();
+            header("Location: ". URLROOT ."wagenparken/mededeling-failed");
         }
     }
 }

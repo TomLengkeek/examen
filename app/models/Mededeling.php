@@ -32,19 +32,19 @@ class Mededeling
         return $this->db->resultSet();
     }
 
-    public function addMededelingLeerling($new, $old, $post) {
+    public function getSingleLeerlingen($email) {
+        $this->db->query("SELECT * FROM leerlingen WHERE email = :email");
+        $this->db->bind(':email', $email);
+        return $this->db->single();
+    }
 
-        $this->db->query("UPDATE leerling SET mededeling = :WHERE Email = :old");
+    public function addMededelingLeerling($new, $old) {
+
+        $this->db->query("UPDATE leerlingen SET mededeling=:new WHERE email = :old");
 
         $this->db->bind(':new', $new);
         $this->db->bind(':old',$old);
-        $this->db->bind(':Voornaam', $post["Voornaam"]);
-        $this->db->bind(':Tussevoegsel', $post["Tussevoegsel"]);
-        $this->db->bind(':Achternaam', $post["Achternaam"]);
-        $this->db->bind(':Klas', $post["Klas"]);
-        $this->db->bind(':Studentnummer', $post["Studentnummer"]);
 
         $this->db->execute();
-
     }
 }

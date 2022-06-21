@@ -24,16 +24,16 @@
             </ul>
         </div>
         <div class="main_content">
-            <div class="header">categorieën beheren</div>
+            <div class="header">mededeling toevoegen</div>
             <div class="info">
-                <form action="<?= URLROOT; ?>/categories/update" method="post">
+                <form action="<?= URLROOT; ?>mededelingen/addMededeling" method="post">
                     <div class="form-group">
-                        <label for="">naam categorie</label>
-                        <input type="text" name="omschrijving" value="<?= $data["row"]->omschrijving; ?>" class="form-control">
+                        <label for="">Mededeling</label>
+                        <input type="text" name="mededeling" value="<?= $data["row"]->mededeling; ?>" class="form-control">
                     </div>
-                    <input type="hidden" name="old" value="<?=$data["row"]->omschrijving ?>">
+                    <input type="hidden" name="old" value="<?=$data["row"]->email ?>">
                     <div class="form-group">
-                        <button type="submit" name="update" class="btn btn-primary">bewerken</button>
+                        <button type="submit" name="update" class="btn btn-primary">mededeling toevoegen</button>
                     </div>
                 </form>
             </div>
