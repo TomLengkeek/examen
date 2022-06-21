@@ -3,6 +3,7 @@
 class Opmerkingen implements IModels{
     private $db;
     public $les;
+    public $opmerking;
     public function __construct(){
         $this->db = new Database();
     }

@@ -16,20 +16,21 @@ class Instructeur extends Controller{
         $this->view("Instructeur/index");
     }
 
+    //function for providing cards to the view
     public function Vread($message = ""){
         
          //set up alerts that pop up when we have done an action
          $alert = null;
          if (!empty($message)) {
              switch ($message) {
-                 case "item-failed":
+                 case "opmerking-toevoegen":
                      $alert .=  '<div class="alert alert-danger" style="text-align: center;" role="alert">
-                             kon niet de paginas ophalen
+                             Opmerking is leeg, kan niet
                              </div>';
                      break;
-                 case "out-range":
+                 case "success":
                      $alert .=  '<div class="alert alert-danger" style="text-align: center;" role="alert">
-                                 pagina met dit nummer bestaat niet
+                                 opmerking toegevoegd
                              </div>';
                      break;
                  default:
@@ -66,10 +67,26 @@ class Instructeur extends Controller{
         ];
         $this->view("instructeur/read",$data);
     }
-
+    //function for updating or inserting a comment
     public function Vcomment($id){
+        //check if we have entered the page with post variables
         if($_SERVER["REQUEST_METHOD"]== "POST"){
+            //check if we have filled in the comment
+            if(!$this->validate(["comment"])){
+                header("location: " . URLROOT . "/instructeur/read/opmerking-toevoegen");
+            }
+            //if there is no comment already we want to make one otherwise update it
+            try{
+                if($_POST["status"] == false){
+                    $this->opmerkingModel->les = $id;
+                    $this->opmerkingModel->opmerking = sanitize($_POST["comment"]);
+                    $this->opmerkingModel->insert();
+                }else{
+                    $this->opmerkingModel->update();
+                }
+            }catch(PDOException $e){
 
+            }
         }
         $result = null;
 
@@ -79,7 +96,7 @@ class Instructeur extends Controller{
         }catch(PDOException $e){
             $records = "";
         }
-        
+
         $status = false;
         if($result->opmerking){
             $status = true;
@@ -87,7 +104,8 @@ class Instructeur extends Controller{
 
         $data = [
             "result" => $result,
-            "status" => $status
+            "status" => $status,
+            "lesid" => $id
         ];
         $this->view("instructeur/comment",$data);
     }
