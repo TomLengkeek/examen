@@ -65,7 +65,6 @@ class Wagenparken extends Controller {
     
             $this->view("wagenparken/index", $data);
 
-    
         } catch (PDOEXception $e) {
             echo "fetch failed" . $e->getMessage();
             //header("Refresh:3; url=" . URLROOT . "/home/index" );
