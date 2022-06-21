@@ -89,10 +89,7 @@ class opmerkingen extends Controller{
 
         }else{
             try{
-                //$this->opmerkingModel->Opmerking = $Opmerking;
-                //echo $Id;exit();
                $result = $this->opmerkingModel->getSingle($Id);
-               //var_dump($result);exit();
             }catch(PDOException $e){
 
             }
