@@ -13,7 +13,69 @@ class Actieveleerlingen extends Controller{
         $this->ActieveLeerlingenModel = $this->model('Actieveleerling');
     }
 // functie voor de index hier worden de records ingedaan
-  
+    public function index($message = ""){
+
+        $alert = "";
+        switch($message){
+            case "delete-succes":
+                $alert = '<div class="alert alert-success" role="alert">
+                U heeft het succesvol verwijderd
+              </div>';
+                break;
+            case "delete-failed":
+                $alert = '<div class="alert alert-danger" role="alert">
+                U record is NIET SUCCESVOL verwijderd
+                </div>';
+                break;
+            case "update-succes":
+                $alert = '<div class="alert alert-success" role="alert">
+                U record is succesvol geupdated
+                </div>';
+                break;
+            case "update-failed":
+                $alert = '<div class="alert alert-danger" role="alert">
+                U record is NIET SUCCESVOL geupdated
+                </div>';
+                break;
+            case "create-failed":
+                $alert = '<div class="alert alert-danger" role="alert">
+                U record is NIET SUCCESVOL toegevoegd
+                </div>';
+                break;
+            case "create-succes":
+                $alert = '<div class="alert alert-success" role="alert">
+                U record is SUCCESVOL toegevoegd
+                </div>';
+                break;
+            
+        }
+       
+        try{
+            $records = "";
+            foreach($this->ActieveLeerlingenModel->getAllactiveleerlingen() as $record){
+                $records .= '<tr>
+                
+                <td>'.$record->Voornaam . '</td>
+                <td>'.$record->Achternaam . '</td>
+                <td>'. $record->Email . '</td>
+                <td>'. $record->telefoonnummer .'</td>
+                <td>'. $record->Adres .'</td>
+                <td>'. $record->Status .'</td>
+                <td><a href="' . URLROOT . '/Actieveleerlingen/delete/' . $record->Email .'"><button type="button" class="btn btn-danger">Verwijderen</button></a></td>
+                </tr>';
+            }
+        }catch(PDOException $e){
+            echo $e->getMessage("De database is niet goed geconnect");
+        }
+        $data = [
+            "records" => $records, 
+            "alert" => $alert
+        ];
+
+
+        $this->view('Actieveleerling/index',$data);
+    }
+
     // functie voor delete, waarbij als die gedelete word een melding krijgt 
    public function delete($Email) {
         try{

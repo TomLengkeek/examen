@@ -8,7 +8,24 @@ Class Actieveleerling{
     public $achternaam;
     public $oldemail;
     
+//slaat database connectie op in $db
+public function __construct(){
+  $this->db = new Database();
+}
+// functie voor gebruiker gegevens op te halen.
+public function getAllactiveleerlingen(){
+$this->db->query("SELECT * FROM `actieve leerlingen`");
+return $this->db->resultSet();
+}
 
+// hij haalt een record op uit de database    
+public function getSingle(){
+$this->db->query("SELECT * FROM `actieve leerlingen` WHERE Email =:Email");
+$this->db->bind(":Email", $this->Email);
+
+return $this->db->single();
+
+}
 
 
 
