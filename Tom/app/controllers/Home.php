@@ -12,6 +12,8 @@ Class Home extends Controller {
         $this->view("home/index");
     }
 
+
+    //fake login function just check the names and redirect
     public function login(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST["name"] == "instructeur"){
@@ -19,7 +21,6 @@ Class Home extends Controller {
             }else if($_POST["name"] == "rijschoolhouder"){
                 header("Location: " . URLROOT . "/rijschoolhouder/index");
             }
-            
         }
     }
 }
