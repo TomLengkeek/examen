@@ -69,7 +69,4 @@ class Wagenparken extends Controller {
             header("Location: ". URLROOT ."studenten/data-failed");
         }
     }
-
-
-
 }
