@@ -15,7 +15,7 @@ class Instructeurs implements IModels{
     //gets and returns a single gebruiker based on id
     public function getSingle(){
         $this->db->query("SELECT id,
-                                naam,
+                                voornaam,
                                 achternaam,
                                 woonplaats,
                                 telefoonnummer,
@@ -28,7 +28,7 @@ class Instructeurs implements IModels{
     //gets and returns all gebruikers
     public function getAll(){
         $this->db->query("SELECT id,
-                                naam,
+                                voornaam,
                                 achternaam,
                                 woonplaats,
                                 telefoonnummer,
@@ -40,7 +40,7 @@ class Instructeurs implements IModels{
 
 
     //counts the amount of records inside the database and returns them as itemCount
-    public function countItems(){
+    public function count(){
         $this->db->query("SELECT COUNT(id) as itemCount FROM instructeur");
         $this->db->execute();
 
@@ -50,9 +50,23 @@ class Instructeurs implements IModels{
     //gets the right records based on what page number we are on
     public function getPages($pageNumber){
         if($pageNumber == 1){
-            $this->db->query("SELECT * FROM item limit 5");
+            $this->db->query("SELECT voornaam,
+                                    achternaam,
+                                    woonplaats,
+                                    telefoonnummer,
+                                    status 
+                                    FROM instructeur 
+                                    limit 5");
+
         }else{
-            $this->db->query("SELECT * FROM item limit :pageNumber, :pageOffset");
+            $this->db->query("SELECT voornaam,
+                                    achternaam,
+                                    woonplaats,
+                                    telefoonnummer,
+                                    status 
+                                    FROM instructeur 
+                                    limit :pageNumber, :pageOffset");
+
             $this->db->bind(":pageNumber", ($pageNumber * 5) - 5);
             $this->db->bind(":pageOffset", $pageNumber * 5);
         }
