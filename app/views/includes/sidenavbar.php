@@ -14,6 +14,7 @@
             <h2>Easy Drive 4 All</h2>
             <ul>
                 <li><a href="<?= URLROOT; ?>wagenparken/index"><i class="fas fa-list"></i>Wagenparktabel</a></li>
+                <li><a href="<?= URLROOT; ?>mededelingen/index"><i class="fas fa-list"></i>Mededeling sturen</a></li>
             </ul>
         </div>
     </div>

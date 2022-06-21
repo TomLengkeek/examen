@@ -67,4 +67,9 @@ class Wagenparken extends Controller {
             header("Location: ". URLROOT ."wagenparken/data-failed");
         }
     }
+
+    public function sayMyName($name)
+    {
+        return "Hallo mijn naam is: " . $name;
+    }
 }

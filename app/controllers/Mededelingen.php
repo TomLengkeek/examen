@@ -43,6 +43,7 @@ class Mededelingen extends Controller {
             foreach ($Mededelingen as $value) {
                 $tbody .= "<tr>
                                 <td>$value->email</td>
+                                <td>$value->rol</td>
                                 <td>$value->naam</td>
                                 <td>$value->telefoonnummer</td>
                                 <td>$value->mededeling</td>
@@ -62,7 +63,7 @@ class Mededelingen extends Controller {
                 'tbody' => $tbody,
                 'alert' => $alert
             ];
-    
+
             $this->view("mededelingen/index", $data);
 
         } catch (PDOEXception $e) {

@@ -29,7 +29,7 @@
                 <form action="<?= URLROOT; ?>mededelingen/addMededeling" method="post">
                     <div class="form-group">
                         <label for="">Mededeling</label>
-                        <input type="text" name="mededeling" value="<?= $data["row"]->mededeling; ?>" class="form-control">
+                        <input type="text" name="mededeling" required value="<?= $data["row"]->mededeling; ?>" class="form-control">
                     </div>
                     <input type="hidden" name="old" value="<?=$data["row"]->email ?>">
                     <div class="form-group">

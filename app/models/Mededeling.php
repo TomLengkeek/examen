@@ -22,7 +22,7 @@ class Mededeling
     //deze functie haalt alles op uit het wagenpark database en sorteers de date op kenteken
     public function getLeerlingen()
     {
-        $this->db->query("SELECT * FROM leerlingen ORDER BY naam ASC");
+        $this->db->query("SELECT leerlingen.email, leerlingen.rol, leerlingen.naam, leerlingen.telefoonnummer, leerlingen.mededeling, instructeurs.email, instructeurs.rol, instructeurs.naam, instructeurs.telefoonnummer, instructeurs.mededeling FROM leerlingen INNER JOIN instructeurs ON leerlingen.email=leerlingen.email");
         return $this->db->resultSet();
     }
 
