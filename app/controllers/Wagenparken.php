@@ -20,8 +20,6 @@ class Wagenparken extends Controller {
         }
     }
 
-    
-
     public function index($message = "")
     {
         $alert ="";
