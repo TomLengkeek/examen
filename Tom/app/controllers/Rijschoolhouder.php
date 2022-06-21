@@ -27,7 +27,7 @@ class Rijschoolhouder extends Controller{
                     break;
                 case "out-range":
                     $alert .=  '<div class="alert alert-danger" style="text-align: center;" role="alert">
-                                pagina met dit nummer bestaat niet
+                            pagina met dit nummer bestaat niet
                             </div>';
                     break;
                 default:

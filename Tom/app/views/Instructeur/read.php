@@ -11,20 +11,24 @@
     <link rel="stylesheet" href="<?= APPROOT ?>/public/css/style.css">
     <title>Instructeur</title>
     <style>
-        .col-12 {
-            margin-top: 10px;
-            margin-top: 15%;
+        .row {
+            margin-top: 20px;
+            margin-left: 5%;
         }
+
+        .card{
+            margin-top:20px;
+        }
+
+        
     </style>
     <link rel="stylesheet" href="<?php URLROOT ?>/public/css/style.css">
 </head>
 
 <body>
-    <div class="col-12">
-        <section>
-            
-        </section>
-    </div>
+    <?php show_message("instructeur/read", $data["alert"]) ?>
+    <div class="row">
+            <?=$data["records"]; ?>
     </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
