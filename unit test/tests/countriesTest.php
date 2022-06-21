@@ -11,7 +11,7 @@ namespace TDD\Test;
 require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 use PHPUnit\Framework\TestCase;
-use mvcexamen\controllers\Todo;
+use mvcexamen\controllers\Actieveleering;
 
 
  class countriesTest extends TestCase
@@ -21,7 +21,7 @@ use mvcexamen\controllers\Todo;
     */
     public function testSayMyName($input,$expected)
     {
-        $artikels = new ToDo();
+        $artikels = new Actieveleerling();
         $output = $artikels->sayMyName($input);
         $message = "Er moet uitkomen: 'Mijn naam is: $input'";
 

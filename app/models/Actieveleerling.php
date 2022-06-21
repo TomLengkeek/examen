@@ -12,7 +12,7 @@ Class Actieveleerling{
 public function __construct(){
   $this->db = new Database();
 }
-// functie voor gebruiker gegevens op te halen.
+// functie voor activeleerlingen gegevens op te halen.
 public function getAllactiveleerlingen(){
 $this->db->query("SELECT * FROM `actieve leerlingen`");
 return $this->db->resultSet();

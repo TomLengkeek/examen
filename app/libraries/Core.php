@@ -6,7 +6,7 @@
    */
   class Core {
     // protected $currentController = 'Actieveleerlingen';
-    protected $currentController = 'Opmerkingen';
+    protected $currentController = 'opmerkingen';
     protected $currentMethod = 'index';
     protected $params = [];
 

@@ -54,12 +54,12 @@ class opmerkingen extends Controller{
             $records = "";
             foreach($this->opmerkingModel->getAllopmerkleerlingen() as $record){
                 $records .= '<tr>
+                <td>'.$record->Naam . '</td>
                 <td>'.$record->Datum . '</td>
                 <td>'.$record->Leerling . '</td>
                 <td>'. $record->Onderdeel . '</td>
-                <td>'. $record->Les . '</td>
-                <td>'. $record->Opmerking . '</td>
-                <td><a href="' . URLROOT . '/todo/update/' . $record->Datum .'"><button type="button" class="btn btn-success">Opmerking toevoegen</button></a></td>
+                <td>'. $record->Id . '</td>
+                <td><a href="' . URLROOT . 'opmerking/update/' . $record->Id .'"><button type="button" class="btn btn-success">Opmerking toevoegen</button></a></td>
                 </tr>';
             }
         }catch(PDOException $e){
@@ -73,24 +73,31 @@ class opmerkingen extends Controller{
 
         $this->view("/opmerking/index",$data);
     }
-
-    // functie voor delete, waarbij als die gedelete word een melding krijgt 
-   public function delete($Email) {
-        try{
-            $this->opmerkingModel->Email = $Email;
-
-            if($this->opmerkingModel->getSingle()){
-                $this->opmerkingModel-> deleteGebruiker();
-                
-                header("Location: " . URLROOT . "/opmerking/index/delete-succes");
-      
+    
+    // functie voor updaten, waarbij als die update word een melding krijgt 
+    public function update($Opmerking = ""){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $values = ["Les","Opmerking","oldOpmerking"];
+            if(!$this->validate($values)){
+            Header("Location: " . URLROOT . "/opmerking/index/update-failed");
             }
-            else{
-                header("Location: " . URLROOT . "/opmerking/index/delete-failed");
-      
+            $this->opmerkingModel->Les = $this->sanitize($_POST["Les"]);
+            $this->opmerkingModel->Opmerking = $this->sanitize($_POST["Opmerking"]);
+            $this->opmerkingModel->oldOpmerking = $this->sanitize($_POST["oldOpmerking"]);
+            $this->opmerkingModel->updateopmerking();
+           Header("Location: " . URLROOT . "/opmerking/index/update-succes");
+
+        }else{
+            try{
+                $this->opmerkingModel->Opmerking = $Opmerking;
+               $result = $this->opmerkingModel->getSingle();
+            }catch(PDOException $e){
+
             }
-        }catch(PDOException $e){
-            Header("Location: " . URLROOT . "/opmerking/index/delete-failed");
-        }
+            $data = [
+                "info" => $result
+            ];
+          $this->view("opmerking/update",$data);
+        }       
     }
 }

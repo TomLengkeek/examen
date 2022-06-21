@@ -5,7 +5,7 @@
 
 
 
-// deze controller regelt alle views in de map van views/ToDo    
+// deze controller regelt alle views in de map van views/Actieveleerlingen   
 class Actieveleerlingen extends Controller{
     private $ActieveLeerlingenModel;
 
@@ -95,6 +95,8 @@ class Actieveleerlingen extends Controller{
             Header("Location: " . URLROOT . "/Actieveleerlingen/index/delete-failed");
         }
     }
+
+    // functie voor update waarbij als die geupdate word een melding krijgt
     public function update($email = ""){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $values = ["voornaam", "achternaam", "email", "oldemail"];
@@ -124,6 +126,8 @@ class Actieveleerlingen extends Controller{
           $this->view("ToDo/update",$data);
         }       
     }
+
+    //Functie voor create 
     public function create($email = ""){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
