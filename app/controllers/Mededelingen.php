@@ -7,18 +7,22 @@ class Mededelingen extends Controller {
     {
         try 
         {    
+            //geeft aan wat de model is
             $this->mededelingModel = $this->model('Mededeling');
             //echo "construct met de model gelukt";
         } 
         catch (Exception $e) 
         {
+            //als hiet fout gaat krijgt het een error message
             $e->getMessage();exit();
             echo "construct met de model niet gelukt" . $e->getMessage();
         }
     }
 
+
     public function index($message = "")
     {
+        //switch case voor de berichten op de website
         $alert ="";
         if(!empty($message)){
             switch($message){
@@ -36,6 +40,7 @@ class Mededelingen extends Controller {
         }
 
         try {
+            //zegt welke functie de model moet gebruiken
             $Mededelingen = $this->mededelingModel->getLeerlingen();
             // var_dump($wagenparken);exit();
 
@@ -50,19 +55,20 @@ class Mededelingen extends Controller {
                                 <td><a href='" . URLROOT . "mededelingen/addmededeling/$value->email'>mededeling toevoegen</a></td>
                             </tr>";
             }
-
-            if (empty($tbody))
-            {
-                $alert .= '<div class="alert alert-primary" role="alert">
-                    de data is leeg
-                  </div>';
-            }
         
             $data = [
                 'title' => "wagenpark",
                 'tbody' => $tbody,
                 'alert' => $alert
             ];
+             
+            //checkt of de data leeg is zo ja dan geeft het een bericht op de pagina
+            if (empty($tbody))
+            {
+                $alert .= '<div class="alert alert-primary" role="alert">
+                    de data is leeg
+                  </div>';
+            }
 
             $this->view("mededelingen/index", $data);
 
@@ -82,7 +88,7 @@ class Mededelingen extends Controller {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $this->mededelingModel->addMededelingLeerling($_POST["mededeling"], $_POST["old"]);
-                
+
                 header("Location: ". URLROOT ."mededelingen/index/updating-succes");
             } 
             else 

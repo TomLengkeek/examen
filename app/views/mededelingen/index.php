@@ -29,6 +29,24 @@
                 <div class="row">
                     <div class="col-md-12">
                         <?= $data["alert"] ?>
+                        <h1 class="text-center">Leerlingen</h1>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>email</th>
+                                    <th>rol</th>
+                                    <th>naam</th>
+                                    <th>telefoonnummer</th>
+                                    <th>mededeling</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?= $data["tbody"]; ?>
+                            </tbody>
+                        </table>
+                        <br></br>
+                        <h1 class="text-center">Instructeurs</h1>
                         <table class="table">
                             <thead>
                                 <tr>
