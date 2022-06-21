@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="<?= APPROOT ?>/public/css/style.css">
-    <title>Rijschoolhouder</title>
+    <title>Instructeur</title>
     <style>
         section {
             max-width: 30%;
@@ -34,8 +34,8 @@
 <body>
     <div class="col-12">
         <section>
-            <h2>Rijschoolhouder startpagina</h1>
-            <a href="<?=URLROOT?>/rijschoolhouder/Vread"><button class="btn btn-success">Overzicht instructeurs</button></a>
+            <h2>Instructeur startpagina</h1>
+            <a href="<?=URLROOT?>/instructeur/Vread"><button class="btn btn-success">Overzicht Lessen</button></a>
         </section>
     </div>
     </div>
