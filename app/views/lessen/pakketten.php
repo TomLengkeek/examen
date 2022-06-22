@@ -36,10 +36,10 @@
                             <thead>
                                 <tr>
                                     <th>Naam</th>
-                                    <th>Prijs</th>
-                                    <th>Aantal lessen</th>
+                                    <th>Aantal lessen van een uur</th>
                                     <th>CBR examen</th>
-                                    <th>Betaal termijnen</th>
+                                    <th>betaal in een keer</th>
+                                    <th>Betaal in termijn</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -50,11 +50,6 @@
                         </table>
                         <br></br>
                         <h3 class="text-center">5 lessen van 1 uur</h3>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-primary">Betaal in een keer (€440)</button>
-                            <button type="button" class="btn btn-primary">Betaal in termijn 2 X (€220)</button>
-                        </div>
-                        
                     </div>
                 </div>
             </div>

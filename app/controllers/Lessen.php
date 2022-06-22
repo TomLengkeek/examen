@@ -154,9 +154,9 @@ class Lessen extends Controller {
             foreach ($lessen as $value) {
                 $tbody .= "<tr>
                                 <td>$value->naam</td>
-                                <td>$value->prijs</td>
                                 <td>$value->aantalLessen</td>
                                 <td>$value->cbrExamen</td>
+                                <td>$value->prijs</td>
                                 <td>$value->betaalTermijnen</td>
                             </tr>";
             }

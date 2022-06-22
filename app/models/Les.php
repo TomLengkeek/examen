@@ -30,7 +30,7 @@ class Les
     //functie om lessen op te halen allen met het leerling id "3" en alleen de lessen die na deze dag komen
     public function getLessenLeerling()
     {
-        $this->db->query("SELECT * FROM lessen WHERE leerling ='3' AND datum > CURDATE()");
+        $this->db->query("SELECT * FROM lessen WHERE leerling ='3' AND datum <= CURDATE()");
         return $this->db->resultSet();
     }
 
