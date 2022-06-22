@@ -3,13 +3,15 @@
 class Autokms extends Controller
 {
 
+
+    // vbouwt een constructor om connectie met de model autokm te maken
     public function __construct()
     {
         $this->kilometerModel = $this->model('Autokm');
     }
 
 
-
+    // index function om tabellen te weergeven en om de index view te laden, $data
     public function index()
     {
 

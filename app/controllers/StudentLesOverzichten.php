@@ -10,8 +10,23 @@ class StudentLesOverzichten extends Controller
 
 
 
-    public function index()
+    public function index($messages = "")
     {
+
+        $alert = '';
+        switch ($messages) {
+            case "delete-success":
+                $alert = '<div class="alert alert-success" role="alert">
+                            Gebruiker is succesvol verwijderd
+                        </div>';
+                break;
+            case "delete-failed":
+                $alert = '<div class="alert alert-danger" role="alert">
+                            Gebruiker is helaas niet verwijderd probeer opnieuw
+                        </div>';
+                break;
+        }
+
 
 
 
@@ -25,10 +40,10 @@ class StudentLesOverzichten extends Controller
             <td>$value->datum</td>
             <td>$value->instructeur</td>
             <td>
-            <a href='" . URLROOT . "/GetAllStudentLes/update/$value->id'><i class='fa fa-pencil'>update</i></a>
+            <a href='" . URLROOT . "/StudentLesOverzichten/update/$value->id'><i class='fa fa-pencil'>update</i></a>
             </td>
             <td>
-            <a href='" . URLROOT . "/GetAllStudentLes/deleteAfspraak/$value->id'><i class='fa fa-trash'>delete</i></a>
+            <a href='" . URLROOT . "/StudentLesOverzichten/deleteAfspraak/$value->id'><i class='fa fa-trash'>delete</i></a>
             </td>
             <tr>
             ";
@@ -52,8 +67,8 @@ class StudentLesOverzichten extends Controller
         try {
             $this->studentoverzichtmodel->id = $id;
 
-            if ($this->studentoverzichtmodel->getSingle()) {
-                $this->studentoverzichtmodel->getSingleAfspraak();
+            if ($this->studentoverzichtmodel->getSingleAfspraak()) {
+                $this->studentoverzichtmodel->deleteAfspraak();
 
                 header("Location: " . URLROOT . "/StudentLesOverzichten/index");
             } else {
