@@ -30,29 +30,12 @@ return $this->db->single();
 
 }
 
-// functie voor opmerking van een onderdeel te updaten.
+// functie voor onderdeel van een onderdeel te updaten.
 public function updateonderdeel($post){
-    // var_dump($post);exit();
     $this->db->query("UPDATE `lessen` 
     SET Onderdeel = :Onderdeel WHERE Id = :Id");
     $this->db->bind(":Id", $post["Id"]);
     $this->db->bind(":Onderdeel", $post["Onderdeel"]);
-    // $this->db->bind(":oldOndereel", $this->oldOnderdeel);
-    // var_dump($this->db);exit();
     $this->db->execute();
 }
-
-public function createinstructeur($post){
-
-    $this->db->query("INSERT INTO `lessen` SET Naam = :Naam, Datum = :Datum, Tijd = :Tijd");
-    
-    $this->db->bind(':email', $post["email"], );
-    $this->db->bind(':voornaam', $post["voornaam"], );
-    $this->db->bind(':achternaam', $post["achternaam"], );
-  
-    $this->db->execute();
-
-}
-
-
 }

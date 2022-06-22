@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<!--Navigatie balk voor opmerkingen van leerling -->
+<!--Navigatie balk voor instructeur -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,19 +22,8 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">actieve leerlingen</a>
+        <a class="nav-link" href="#">Les rooster</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">ziekmelders</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">instructeurs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">wagenpark</a>
-      </li>
-      
-    
     </ul>
   </div>
 </nav>

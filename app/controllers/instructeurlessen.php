@@ -77,12 +77,6 @@ class instructeurlessen extends Controller{
         public function update($Id = ""){
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $values = ["Id","Onderdeel","oldOnderdeel"];
-                // if(!$this->validate($values)){
-                // Header("Location: " . URLROOT . "/instructeurlessen/index/update-failed");
-                // }
-                // $this->instructteurlesmodel->Id = $this->sanitize($_POST["Id"]);
-                // $this->instructteurlesmodel->Onderdeel = $this->sanitize($_POST["Onderdeel"]);
-                // $this->instructteurlesmodel->oldOnderdeel = $this->sanitize($_POST["oldOnderdeel"]);
                 $this->instructteurlesmodel->updateonderdeel($_POST);
                Header("Location: " . URLROOT . "/instructeurlessen/index/update-succes");
     

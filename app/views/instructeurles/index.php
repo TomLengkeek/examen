@@ -19,7 +19,7 @@ if(!empty($data["alert"]))
    header("Refresh: ; url=" . URLROOT. "/instructeurlessen/index");
 ?>
 <div class = "col-12">
- <a href="http://Examenopdracht//create" type= "button" style="float: right; margin-bottom : 20px;"class="btn btn-danger btn-lg btn-block"> Nieuwe record toevoegen</a><h1 style="margin-top : 20px; margin-bottom : 20px;">Overzicht van instructeur lesrooster</h1>
+<h1 style="margin-top : 20px; margin-bottom : 20px;">Overzicht van instructeur lesrooster</h1>
  
 </div>
 <!--de tabel van instructieurles  -->
