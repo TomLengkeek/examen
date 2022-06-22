@@ -30,9 +30,9 @@ class Lessen implements IModels{
     }
     //get the opmerking based on the lesson
     public function getOpmerkingWithLes(){
-        $this->db->query("SELECT Lessen.Id,Opmerkingen.Opmerking from Lessen
+        $this->db->query("SELECT Opmerkingen.Opmerking from Lessen
         join Opmerkingen on Lessen.Id = Opmerkingen.Les
-        where Lessen.Id = :id;");
+        where Lessen.Id = :id");
 
         $this->db->bind(":id", $this->id);
         
@@ -40,7 +40,7 @@ class Lessen implements IModels{
     }
     //get the onderwerp based on the lesson
     public function getOnderwerpWithLes(){
-        $this->db->query("SELECT Lessen.Id,Onderwerpen.Onderwerp from Lessen
+        $this->db->query("SELECT Onderwerpen.Onderwerp from Lessen
         join Onderwerpen on Lessen.Id = Onderwerpen.Les
         where Lessen.Id = :id;");
 

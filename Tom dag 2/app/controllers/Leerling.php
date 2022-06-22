@@ -41,8 +41,8 @@ class Leerling extends Controller{
                 <th scope='row'>" . $lessonNumber . "</th>
                 <td> " . $record->Datum . "</td>
                 <td> " . $record->Instructeur . "</td>
-                <td> <a href='". URLROOT . "/leerling/Opmerking/". $record->Id ."'><button type='button' class='btn btn-info'>Opmerking</button></a> </td>
-                <td> <a href='". URLROOT . "/leerling/Onderwerp/". $record->Id ."'><button type='button' class='btn btn-info'>Onderwerp</button></a></td>  
+                <td> <a href='". URLROOT . "/leerling/Vopmerking/". $record->Id ."'><button type='button' class='btn btn-info'>Opmerking</button></a> </td>
+                <td> <a href='". URLROOT . "/leerling/Vonderwerp/". $record->Id ."'><button type='button' class='btn btn-info'>Onderwerp</button></a></td>  
                 </tr>";
             }
             
@@ -62,6 +62,33 @@ class Leerling extends Controller{
             "records" => $records
         ];
         $this->view("leerling/read",$data);
+    }
+
+    public function Vopmerking($id = null){
+        if(empty($id)){
+            header("Location: " . URLROOT . "/leerling/Vread");
+        }
+
+        $opmerking = '';
+        try{
+            //get the opmerking based on the lesson and send it to the view
+            $this->lessenModel->id = $id;
+            foreach($this->lessenModel->getOpmerkingWithLes() as $record){
+                $opmerking .= $record->Opmerking . ";";    
+            }
+        }catch(PDOException $e){
+            $opmerking = 'kon niet vinden want :' . $e->getMessage();
+        }
+
+        if(empty($opmerking)){
+            $opmerking = 'geen opmerking gevonden';
+        }
+
+        $data = [
+            "opmerking" => $opmerking
+        ];
+
+        $this->view("leerling/opmerking",$data);
     }
 }
 
