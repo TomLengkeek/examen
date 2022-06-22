@@ -42,7 +42,7 @@ class Lessen implements IModels{
     public function getOnderwerpWithLes(){
         $this->db->query("SELECT Onderwerpen.Onderwerp from Lessen
         join Onderwerpen on Lessen.Id = Onderwerpen.Les
-        where Lessen.Id = :id;");
+        where Lessen.Id = :id");
 
         $this->db->bind(":id", $this->id);
         

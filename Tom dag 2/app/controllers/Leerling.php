@@ -74,7 +74,7 @@ class Leerling extends Controller{
             //get the opmerking based on the lesson and send it to the view
             $this->lessenModel->id = $id;
             foreach($this->lessenModel->getOpmerkingWithLes() as $record){
-                $opmerking .= $record->Opmerking . ";";    
+                $opmerking .= $record->Opmerking . "; ";    
             }
         }catch(PDOException $e){
             $opmerking = 'kon niet vinden want :' . $e->getMessage();
@@ -90,6 +90,35 @@ class Leerling extends Controller{
 
         $this->view("leerling/opmerking",$data);
     }
+
+
+    public function Vonderwerp($id = null){
+        if(empty($id)){
+            header("Location: " . URLROOT . "/leerling/Vread");
+        }
+
+        $onderwerp = '';
+        try{
+            //get the opmerking based on the lesson and send it to the view
+            $this->lessenModel->id = $id;
+            foreach($this->lessenModel->getOnderwerpWithLes() as $record){
+                $onderwerp .= $record->Onderwerp . "; ";    
+            }
+        }catch(PDOException $e){
+            $onderwerp = 'kon niet vinden want :' . $e->getMessage();
+        }
+        //if there is no opmerking say we havent found any
+        if(empty($onderwerp)){
+            $onderwerp = 'geen onderwerp gevonden';
+        }
+
+        $data = [
+            "onderwerp" => $onderwerp
+        ];
+
+        $this->view("leerling/onderwerp",$data);
+    }
 }
+
 
 ?>
