@@ -12,6 +12,7 @@
 
     <a href="<?= URLROOT; ?>wagenparken/index">wagenparktabel</a>
     <a href="<?=URLROOT;?>mededelingen/index">mededelingen sturen</a>
+    <a href="<?=URLROOT;?>lessen/index">lessen inzien</a>
 
 </body>
 

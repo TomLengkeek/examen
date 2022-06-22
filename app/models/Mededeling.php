@@ -22,7 +22,7 @@ class Mededeling
     //deze functie haalt alles op uit het wagenpark database en sorteers de date op kenteken
     public function getLeerlingen()
     {
-        $this->db->query("SELECT * FROM leerlingen ORDER BY naam ASC");
+        $this->db->query("SELECT * FROM leerling ORDER BY naam ASC");
         return $this->db->resultSet();
     }
 
@@ -33,14 +33,14 @@ class Mededeling
     }
 
     public function getSingleLeerlingen($email) {
-        $this->db->query("SELECT * FROM leerlingen WHERE email = :email");
+        $this->db->query("SELECT * FROM leerling WHERE email = :email");
         $this->db->bind(':email', $email);
         return $this->db->single();
     }
 
     public function addMededelingLeerling($new, $old) {
 
-        $this->db->query("UPDATE leerlingen SET mededeling=:new WHERE email = :old");
+        $this->db->query("UPDATE leerling SET mededeling=:new WHERE email = :old");
 
         $this->db->bind(':new', $new);
         $this->db->bind(':old',$old);

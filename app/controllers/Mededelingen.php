@@ -105,7 +105,7 @@ class Mededelingen extends Controller {
         catch (PDOEXception $e)
         {
             echo "fetch failed" . $e->getMessage();
-            header("Location: ". URLROOT ."wagenparken/mededeling-failed");
+            //header("Location: ". URLROOT ."wagenparken/mededeling-failed");
         }
     }
 }
