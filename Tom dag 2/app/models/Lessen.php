@@ -21,7 +21,7 @@ class Lessen implements IModels{
     public function getLessonInfo(){
         $this->db->query("SELECT Lessen.Id,Lessen.Datum,Instructeur.Naam as Instructeur from Lessen
         join Instructeur on Lessen.Instructeur = Instructeur.Email
-        where Lessen.Leerling = :leerling
+        where Lessen.Leerling = :leerling and not Datum  > CURRENT_DATE
         order by Datum asc");
 
         $this->db->bind(":leerling", $this->leerling);
