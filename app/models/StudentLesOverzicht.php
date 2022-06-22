@@ -47,16 +47,16 @@ class StudentLesOverzicht
 
 
     // function om les te deleten uit de database
-    public function deleteAfspraak()
+    public function deleteAfspraak($id)
     {
         // sql statemant om delete uit lesson uit te voeren
         $this->db->query("UPDATE  lessen
-                        SET isactief = 0
+                        SET isactief = :val
                         WHERE id = :id");
 
         // bind the placeholder naar id
-        $this->db->bind(":id", $this->id);
-        $this->db->bind(":id", $this->isactief);
+        $this->db->bind(":id", $id);
+        $this->db->bind(":val", 0);
 
         // execute sql statemants/ bind
         $this->db->execute();

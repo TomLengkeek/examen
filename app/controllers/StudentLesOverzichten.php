@@ -41,13 +41,10 @@ class StudentLesOverzichten extends Controller
         foreach ($model as $value) {
             $tablesRow .= " 
             <tr>
-            <td?$value->id</td>
+            <td>$value->id</td>
             <td>$value->datum</td>
             <td>$value->instructeur</td>
             <td>$value->isactief</td>
-            <td>
-            <a href='" . URLROOT . "/StudentLesOverzichten/update/$value->id'><i class='fa fa-pencil'>update</i></a>
-            </td>
             <td>
             <a href='" . URLROOT . "/StudentLesOverzichten/deleteAfspraak/$value->id'><i class='fa fa-trash'>delete</i></a>
             </td>
@@ -89,13 +86,31 @@ class StudentLesOverzichten extends Controller
     public function aanpasAfspraak($id = null)
     {
 
-        $row = $this->studentoverzichtmodel->getSingleAfspraak($id);
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+            // var_dump($_POST);
+
+
+            if (!$this->validate(['reden'])) {
+
+                // message voor als het niet lukt
+                echo "failed";
+                header("Refresh:2; url=" . URLROOT .  "/StudentLesOverzichten/index/");
+            } else {
+
+                try {
+                    filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    $this->StudentLesOverzicht->deleteAfspraak($_POST);
+                    header("Location " . URLROOT . "./StudentLesOverzichten/index/delete-les-succes");
+                } catch (PDOException $e) {
+
+                    header("Location: " . URLROOT . "./StudentLesOverzichten/index/delete-les-failed");
+                }
+            }
+        }
 
         $data = [
-            'title' => "<h1>Update artikeloverzicht</h1>",
-            'row' => $row
-
+            'title' => "<h1>Update artikeloverzicht</h1>"
         ];
 
         $this->view('studentOverzicht/pasaan', $data);
@@ -119,6 +134,16 @@ class StudentLesOverzichten extends Controller
     // delete function die via modelnamen de function zijn werk laten doen
     public function deleteAfspraak($id)
     {
+        // echo ('ik ben hier');
+        // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        //     echo ('ik ben binnen iff');
+        //     $delid = $_GET['id'];
+
+        //     var_dump($delid);
+        //     exit;
+        // }
+
+
         try {
             $this->studentoverzichtmodel->id = $id;
 
