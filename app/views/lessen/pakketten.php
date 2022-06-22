@@ -24,17 +24,20 @@
             </ul>
         </div>
         <div class="main_content">
-            <div class="header">hier kun je je lessen inzien</div>
+            <div class="header">hier kun je alle pakketten zien</div>
             <div class="info">
                 <div class="row">
                     <div class="col-md-12">
                         <?= $data["alert"] ?>
-                        <h1 class="text-center">welke leerling ben jij</h1>
+                        <h1 class="text-center">pakketten</h1>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>leerling</th>
-                                    <th>pakket</th>
+                                    <th>Naam</th>
+                                    <th>Prijs</th>
+                                    <th>Aantal lessen</th>
+                                    <th>CBR examen</th>
+                                    <th>Betaal termijnen</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -42,6 +45,13 @@
                                 <?= $data["tbody"]; ?>
                             </tbody>
                         </table>
+                        <br></br>
+                        <h3 class="text-center">5 lessen van 1 uur</h3>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary">Betaal in een keer (€440)</button>
+                            <button type="button" class="btn btn-primary">Betaal in termijn 2 X (€220)</button>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

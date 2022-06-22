@@ -41,6 +41,7 @@ class Lessen extends Controller {
                 $tbody .= "<tr>
                                 <td>$value->naam</td>
                                 <td>$value->pakket</td>
+                                <td><a href='" . URLROOT . "lessen/getLeerlingLessen/'>verder</a></td>
                             </tr>";
             }
 
@@ -68,7 +69,7 @@ class Lessen extends Controller {
         }
     }
 
-    public function lessenKonijn($message = "")
+    public function getLeerlingLessen($message = "")
     {
         //message switch case voor gepaste error messages (checkt eerst of message niet empty is)
         $alert ="";
@@ -83,7 +84,7 @@ class Lessen extends Controller {
         }
 
         try {
-            $lessen = $this->lesModel->getLessenKonijn();
+            $lessen = $this->lesModel->getLessenLeerling();
             // var_dump($wagenparken);exit();
 
             $tbody = "";
@@ -108,7 +109,7 @@ class Lessen extends Controller {
                 'alert' => $alert
             ];
     
-            $this->view("lessen/lessenKonijn", $data);
+            $this->view("lessen/lessen", $data);
 
         } catch (PDOEXception $e) {
             //als het ophalen van de records niet gelukt is krijgt de gebruiker een gepaste message
@@ -118,9 +119,56 @@ class Lessen extends Controller {
         }
     }
 
-    // functie voor unittest
-    public function sayMyName($name)
+    public function pakketInformatie($message = "")
     {
-        return "Hallo mijn naam is: " . $name;
+        //message switch case voor gepaste error messages (checkt eerst of message niet empty is)
+        $alert ="";
+        if(!empty($message)){
+            switch($message){
+                case "data-failed":
+                    $alert .= '<div class="alert alert-primary" role="alert">
+                    data ophalen niet gelukt
+                  </div>';
+                break;
+            }
+        }
+
+        try {
+            $lessen = $this->lesModel->getPakketInfo();
+            // var_dump($wagenparken);exit();
+
+            $tbody = "";
+            foreach ($lessen as $value) {
+                $tbody .= "<tr>
+                                <td>$value->naam</td>
+                                <td>$value->prijs</td>
+                                <td>$value->aantalLessen</td>
+                                <td>$value->cbrExamen</td>
+                                <td>$value->betaalTermijnen</td>
+                            </tr>";
+            }
+
+            //checkt of tdbody leeg is zo ja dan krijgt de gebruiker een gepaste message
+            if (empty($tbody))
+            {
+                $alert .= '<div class="alert alert-primary" role="alert">
+                    de data is leeg
+                  </div>';
+            }
+        
+            $data = [
+                'title' => "lessen",
+                'tbody' => $tbody,
+                'alert' => $alert
+            ];
+    
+            $this->view("lessen/pakketten", $data);
+
+        } catch (PDOEXception $e) {
+            //als het ophalen van de records niet gelukt is krijgt de gebruiker een gepaste message
+            echo "fetch failed" . $e->getMessage();
+            //header("Refresh:3; url=" . URLROOT . "/home/index" );
+            //header("Location: ". URLROOT ."lessen/data-failed");
+        }
     }
 }

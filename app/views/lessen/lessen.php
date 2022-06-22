@@ -24,17 +24,17 @@
             </ul>
         </div>
         <div class="main_content">
-            <div class="header">hier kun je je lessen inzien</div>
+            <div class="header">reeds gevolgde lessen</div>
             <div class="info">
                 <div class="row">
                     <div class="col-md-12">
                         <?= $data["alert"] ?>
-                        <h1 class="text-center">Hallo Konijn dit zijn jou lessen</h1>
+                        <h1 class="text-center">golvolgde lessen</h1>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>Datum</th>
-                                    <th>pakket</th>
+                                    <th>Leerling</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -42,7 +42,10 @@
                                 <?= $data["tbody"]; ?>
                             </tbody>
                         </table>
-                        <button href="#" type="button" class="btn btn-primary">Terug naar leerling kiezen</button>
+                        <h3>aantal nog tevolgen lessen: 2</h3>
+
+                        <a href="<?=URLROOT;?>lessen/pakketInformatie">Pakketten</a>
+                        
                     </div>
                 </div>
             </div>

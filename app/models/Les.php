@@ -19,29 +19,22 @@ class Les
             echo "connectie met database niet gelukt" . $e->getMessage();
         }
     }
-    
-    //deze functie haalt alles op uit het wagenpark database en sorteers de date op kenteken
-    public function getLessenKonijn()
+
+    public function getpakketInfo()
     {
-        $this->db->query("SELECT * FROM lessen ORDER BY id");
+        $this->db->query("SELECT * FROM pakketten  WHERE naam ='Pakket 1'");
         return $this->db->resultSet();
     }
 
-    public function getLessenSlavink()
+    public function getLessenLeerling()
     {
-        $this->db->query("SELECT * FROM lessen ORDER BY id");
-        return $this->db->resultSet();
-    }
-
-    public function getLessenOtto()
-    {
-        $this->db->query("SELECT * FROM lessen ORDER BY id");
+        $this->db->query("SELECT * FROM lessen WHERE leerling ='3' AND datum > CURDATE()");
         return $this->db->resultSet();
     }
 
     public function getLeerlingen()
     {
-        $this->db->query("SELECT * FROM leerlingen ORDER BY id");
+        $this->db->query("SELECT * FROM leerlingen WHERE naam = 'Konijn'");
         return $this->db->resultSet();
     }
 }
