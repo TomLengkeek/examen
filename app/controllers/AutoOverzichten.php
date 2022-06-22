@@ -61,6 +61,8 @@ class AutoOverzichten extends Controller
             <tr>
             ";
         }
+
+        // data var 
         $data = [
             'title' => 'Home page',
             'data' => $tablesRow,

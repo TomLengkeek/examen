@@ -23,7 +23,12 @@
     <body>
 
 
-
+        <?php
+        if (!empty($data["alert"])) {
+            echo $data["alert"];
+            header("Refresh: 2; url=" . URLROOT . "/AutoOverzichten/index");
+        }
+        ?>
         <div class="container">
             <div class="row">
                 <h1 id="overzichtje">Lessen</h1>
