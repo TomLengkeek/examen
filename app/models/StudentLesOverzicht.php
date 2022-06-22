@@ -18,7 +18,7 @@ class StudentLesOverzicht
     {
 
         // sql statement die de select uitvoert en DESC om het te descenden
-        $this->db->query("SELECT * FROM lessen ORDER BY id DESC");
+        $this->db->query("SELECT * FROM lessen WHERE isactief = 1 ORDER BY id DESC");
 
 
         // resultset m om de resultaten op te halen
@@ -50,10 +50,13 @@ class StudentLesOverzicht
     public function deleteAfspraak()
     {
         // sql statemant om delete uit lesson uit te voeren
-        $this->db->query("DELETE FROM lessen WHERE id = :id");
+        $this->db->query("UPDATE  lessen
+                        SET isactief = 0
+                        WHERE id = :id");
 
         // bind the placeholder naar id
         $this->db->bind(":id", $this->id);
+        $this->db->bind(":id", $this->isactief);
 
         // execute sql statemants/ bind
         $this->db->execute();
@@ -62,7 +65,7 @@ class StudentLesOverzicht
 
     public function getReden()
     {
-        $this->db->query("SELECT * FROM annuleerlessen");
+        $this->db->query("SELECT * FROM annuleerlessen ORDER BY reden");
         $result = $this->db->resultSet();
 
         return $result;

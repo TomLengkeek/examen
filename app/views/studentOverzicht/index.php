@@ -43,6 +43,7 @@
                             <tr>
                                 <th scope="col">Datum</th>
                                 <th scope="col">Instructeur</th>
+                                <th scope="col">isactief</th>
                             </tr>
                         </thead>
                         <tbody>

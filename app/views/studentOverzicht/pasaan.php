@@ -15,21 +15,14 @@
 
 
 
-        <form action="<?= URLROOT; ?>/overzicht/update" method="POST">
+        <form action="<?= URLROOT; ?>/StudentLesOverzichten/deleteAfspraak" method="POST">
             <table>
                 <tbody>
                     <tr>
                         <td>
-                            <label for="voornaam">ziek:</label>
-                            <input type="text" name="voornaam" id="voornaam" value="<?= $data["row"]->voornaam ?>">
+                            <label for="voornaam">reden:</label>
+                            <input type="text" name="reden" id="reden" value="<?= $data["row"]->id ?>">
                         </td>
-                    </tr>
-                    <tr>
-                        <label for="category">Reden:</label>
-                        <select name="annuleerlessen" id="annuleerlessen" required>
-                            <option value="<?= $data["row"]->annuleerlessen ?>">--- Kies een reden: ---</option>
-                            <?php echo $data['records'] ?>
-                        </select>
                     </tr>
                     <tr>
                         <td>
@@ -37,6 +30,7 @@
                         </td>
                     </tr>
                 </tbody>
+
             </table>
         </form>
     </div>

@@ -41,8 +41,10 @@ class StudentLesOverzichten extends Controller
         foreach ($model as $value) {
             $tablesRow .= " 
             <tr>
+            <td?$value->id</td>
             <td>$value->datum</td>
             <td>$value->instructeur</td>
+            <td>$value->isactief</td>
             <td>
             <a href='" . URLROOT . "/StudentLesOverzichten/update/$value->id'><i class='fa fa-pencil'>update</i></a>
             </td>
@@ -70,22 +72,48 @@ class StudentLesOverzichten extends Controller
 
 
 
-    public function aanpasAfspraak()
+    // validate function
+    public function validate($values = [])
     {
-        $row = $this->studentoverzichtmodel->getSingleAfspraak();
+        $validate = true;
+        foreach ($values as $value) {
+            if (empty($_POST[$value]))
+                $validate = false;
+            break;
+        }
+        return $validate;
+    }
 
-        $this->view('studentOverzicht/pasaan');
 
 
+    public function aanpasAfspraak($id = null)
+    {
+
+        $row = $this->studentoverzichtmodel->getSingleAfspraak($id);
 
 
         $data = [
             'title' => "<h1>Update artikeloverzicht</h1>",
-            'row' => $row,
-            'records' => $records
+            'row' => $row
 
         ];
+
+        $this->view('studentOverzicht/pasaan', $data);
     }
+
+
+
+    public function fillSelector($info = '')
+    {
+        $records = "";
+        foreach ($this->model("StudentLesOverzicht")->getReden() as $record) {
+            $selected = ($info == $record->reden) ? "selected" : ""; //check if the category is the one we have selected
+            $records .= "<option value = '" . $record->reden . "'" . $selected . ">" . $record->reden .  "</option>";
+        }
+        return $records;
+    }
+
+
 
 
     // delete function die via modelnamen de function zijn werk laten doen
@@ -107,19 +135,5 @@ class StudentLesOverzichten extends Controller
         } catch (PDOException $e) {
             header("Location: " . URLROOT . "/StudentLesOverzichten/index/delete-les-failed");
         }
-    }
-
-
-
-
-
-    public function redenSelector($info = '')
-    {
-        $records = "";
-        foreach ($this->model("StudentLesOverzicht")->getMedewerker() as $record) {
-            $selected = ($info == $record->klassen) ? "selected" : ""; //check if the category is the one we have selected
-            $records .= "<option value = '" . $record->klassen . "'" . $selected . ">" . $record->klassen .  "</option>";
-        }
-        return $records;
     }
 }
