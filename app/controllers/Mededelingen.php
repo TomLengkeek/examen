@@ -108,5 +108,4 @@ class Mededelingen extends Controller {
             //header("Location: ". URLROOT ."wagenparken/mededeling-failed");
         }
     }
-    
 }
