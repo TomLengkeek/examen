@@ -10,7 +10,7 @@ define('DB_NAME', 'Examen');
 define('APPROOT', dirname(dirname(__FILE__)));
 
 //url root
-define('URLROOT', 'http://www.examen.nl');
+define('URLROOT', 'http://www.examen-dag2.com');
 
 //sitename
 define('SITENAME', 'Rijschool easy drive 4 all');

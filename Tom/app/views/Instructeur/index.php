@@ -35,7 +35,7 @@
     <div class="col-12">
         <section>
             <h2>Instructeur startpagina</h1>
-            <a href="<?=URLROOT?>/instructeur/Vread"><button class="btn btn-success">Overzicht Lessen</button></a>
+                <a href="<?= URLROOT ?>/instructeur/Vread"><button class="btn btn-success">Overzicht Lessen</button></a>
         </section>
     </div>
     </div>

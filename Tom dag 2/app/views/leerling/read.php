@@ -22,17 +22,16 @@
 </head>
 
 <body>
-    <?php show_message("/rijschoolhouder/Vread/" . $data["pageNumber"], $data["alert"]); ?>
     <div class="col-12">
         <section>
         <table class="table table-dark table-hover" style="text-overflow: ellipsis">
                     <thead>
                         <tr>
-                            <th scope="col">Voornaam</th>
-                            <th scope="col">Achternaam</th>
-                            <th scope="col">woonplaats</th>
-                            <th scope="col">telefoonnummer</th>
-                            <th scope="col">status</th>
+                            <th scope="col">Lesnummer</th>
+                            <th scope="col">datum</th>
+                            <th scope="col">instructeur</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,11 +40,6 @@
                         ?>
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <?=$data["pageItems"]?>
-                </ul>
-                </nav>
         </section>
     </div>
     </div>
