@@ -19,6 +19,7 @@
         <div class="sidebar">
             <ul>
                 <?php
+                //require voor een navbar op de pagina
                 require APPROOT . '/views/includes/sidenavbar.php';
                 ?>
             </ul>
@@ -28,6 +29,7 @@
             <div class="info">
                 <div class="row">
                     <div class="col-md-12">
+                        <!-- haalt de data op die opgeslagen is in "alert" voor als er een error message is -->
                         <?= $data["alert"] ?>
                         <h1 class="text-center">pakketten</h1>
                         <table class="table">
@@ -42,6 +44,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- haalt de data op die opgeslagen is in "tdbody" voor de table op de website -->
                                 <?= $data["tbody"]; ?>
                             </tbody>
                         </table>
