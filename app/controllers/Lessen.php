@@ -33,10 +33,11 @@ class Lessen extends Controller {
         }
 
         try {
-            //
+            //zegt welke functie de model moet gebruiken
             $lessen = $this->lesModel->getLeerlingen();
             // var_dump($wagenparken);exit();
 
+            //alle data word in $tdbody gestop voor de tabel in de vieuw
             $tbody = "";
             foreach ($lessen as $value) {
                 $tbody .= "<tr>
@@ -54,12 +55,14 @@ class Lessen extends Controller {
                   </div>';
             }
         
+            //de data wat opgehaald is word in een grate data array gezet
             $data = [
                 'title' => "lessen",
                 'tbody' => $tbody,
                 'alert' => $alert
             ];
     
+            //als alles gelukt is gaat het naar de vieuw en geeft het de data mee aan de vieuw
             $this->view("lessen/index", $data);
 
         } catch (PDOEXception $e) {
@@ -70,6 +73,7 @@ class Lessen extends Controller {
         }
     }
 
+    //functie om alle leerlinglessen op te halen
     public function getLeerlingLessen($message = "")
     {
         //message switch case voor gepaste error messages (checkt eerst of message niet empty is)
@@ -85,9 +89,11 @@ class Lessen extends Controller {
         }
 
         try {
+            //zegt welke functie de model moet gebruiken
             $lessen = $this->lesModel->getLessenLeerling();
             // var_dump($wagenparken);exit();
 
+            //alle data word in $tdbody gestop voor de tabel in de vieuw
             $tbody = "";
             foreach ($lessen as $value) {
                 $tbody .= "<tr>
