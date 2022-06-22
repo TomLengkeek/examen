@@ -10,7 +10,7 @@
 <body>
     <div style="padding-left: 500px;
             margin-top: 75px;">
-
+        <?php echo $data->id ?>
 
 
 
@@ -20,9 +20,12 @@
                 <tbody>
                     <tr>
                         <td>
-                            <label for="voornaam">reden:</label>
-                            <input type="text" name="reden" id="reden" value="<?= $data["row"]->id ?>">
+                            <label for="id">ziek:</label>
+                            <input type="text" name="id" id="id" value="<?= $data->id ?>">
                         </td>
+                    </tr>
+                    <tr>
+                        <input type="hidden" id="id">
                     </tr>
                     <tr>
                         <td>
@@ -30,7 +33,6 @@
                         </td>
                     </tr>
                 </tbody>
-
             </table>
         </form>
     </div>

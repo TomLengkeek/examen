@@ -112,8 +112,8 @@ class AutoOverzichten extends Controller
 
                     // catch rolt hem door als er binnen de try een fout heeft plaatsgevonden. vervolgens refresht die de url
                 } catch (PDOException $e) {
-                    var_dump($e->getMessage());
-                    exit();
+                    //var_dump($e->getMessage());
+                    //exit();
                     echo "het aanmaken van je auto is niet gelukt";
                     header("Refresh:5; url=" . URLROOT .  "/AutoOverzichten/index/creating-failed");
                 }
@@ -148,7 +148,7 @@ class AutoOverzichten extends Controller
     }
 
 
-
+    // selector die je een transmissie uit de db tabel laat zien
     public function TransmissieSelector($info = '')
     {
         $recordsTransmissie = "";

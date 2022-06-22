@@ -26,7 +26,7 @@
         <?php
         if (!empty($data["alert"])) {
             echo $data["alert"];
-            header("Refresh: 2; url=" . URLROOT . "/AutoOverzichten/index");
+            header("Refresh: 2; url=" . URLROOT . "/StudentLesOverzicht/index");
         }
         ?>
         <div class="container">
@@ -41,9 +41,9 @@
                     <table class="table table-dark table-hover">
                         <thead>
                             <tr>
+                                <th scope="col">id</th>
                                 <th scope="col">Datum</th>
                                 <th scope="col">Instructeur</th>
-                                <th scope="col">isactief</th>
                             </tr>
                         </thead>
                         <tbody>
