@@ -33,6 +33,7 @@ class Lessen extends Controller {
         }
 
         try {
+            //
             $lessen = $this->lesModel->getLeerlingen();
             // var_dump($wagenparken);exit();
 
