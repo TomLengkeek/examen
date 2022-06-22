@@ -79,13 +79,13 @@ class opmerkingen extends Controller{
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $values = ["Id","Opmerking","oldOpmerking"];
             if(!$this->validate($values)){
-            Header("Location: " . URLROOT . "/opmerking/index/update-failed");
+            Header("Location: " . URLROOT . "/opmerkingen/index/update-failed");
             }
             $this->opmerkingModel->Id = $this->sanitize($_POST["Id"]);
             $this->opmerkingModel->Opmerking = $this->sanitize($_POST["Opmerking"]);
             $this->opmerkingModel->oldOpmerking = $this->sanitize($_POST["oldOpmerking"]);
             $this->opmerkingModel->updateopmerking();
-           Header("Location: " . URLROOT . "/opmerking/index/update-succes");
+           Header("Location: " . URLROOT . "/opmerkingen/index/update-succes");
 
         }else{
             try{

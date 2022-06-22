@@ -5,7 +5,7 @@
 
 
 
-// deze controller regelt alle views in de map van views/ToDo    
+// deze controller regelt alle views in de map van views/instructeurles   
 class instructeurlessen extends Controller{
     private $instructteurlesmodel;
 
@@ -52,13 +52,13 @@ class instructeurlessen extends Controller{
        
         try{
             $records = "";
-            foreach($this->instructteurlesmodel->getAllopmerkleerlingen() as $record){
+            foreach($this->instructteurlesmodel->getAllleerlingen() as $record){
                 $records .= '<tr>
                 <td>'.$record->Naam . '</td>
                 <td>'.$record->Datum . '</td>
                 <td>'.$record->Tijd . '</td>        
                 <td>'. $record->Onderdeel . '</td>
-                <td><a href="' . URLROOT . 'instructeurles/update/' . $record->Id .'"><button type="button" class="btn btn-success">onderwerp toevoegen</button></a></td>
+                <td><a href="' . URLROOT . 'instructeurlessen/update/' . $record->Id .'"><button type="button" class="btn btn-success">onderwerp toevoegen</button></a></td>
                 </tr>';
             }
         }catch(PDOException $e){
@@ -74,27 +74,56 @@ class instructeurlessen extends Controller{
     }
     
     // functie voor updaten, waarbij als die update word een melding krijgt 
-    public function update($Id = ""){
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $values = ["Onderdeel","oldOnderdeel"];
-            if(!$this->validate($values)){
-            Header("Location: " . URLROOT . "/instructeurles/index/update-failed");
-            }
-            $this->opmerkingModel->Onderdeel = $this->sanitize($_POST["Onderdeel"]);
-            $this->opmerkingModel->oldOnderdeel = $this->sanitize($_POST["oldOnderdeel"]);
-            $this->opmerkingModel->updateopmerking();
-           Header("Location: " . URLROOT . "/instructeurles/index/update-succes");
-
-        }else{
-            try{
-               $result = $this->opmerkingModel->getSingle($Id);
-            }catch(PDOException $e){
-
-            }
-            $data = [
-                "info" => $result
-            ];
-          $this->view("instructeurles/update",$data);
-        }       
+        public function update($Id = ""){
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                $values = ["Id","Onderdeel","oldOnderdeel"];
+                // if(!$this->validate($values)){
+                // Header("Location: " . URLROOT . "/instructeurlessen/index/update-failed");
+                // }
+                // $this->instructteurlesmodel->Id = $this->sanitize($_POST["Id"]);
+                // $this->instructteurlesmodel->Onderdeel = $this->sanitize($_POST["Onderdeel"]);
+                // $this->instructteurlesmodel->oldOnderdeel = $this->sanitize($_POST["oldOnderdeel"]);
+                $this->instructteurlesmodel->updateonderdeel($_POST);
+               Header("Location: " . URLROOT . "/instructeurlessen/index/update-succes");
+    
+            }else{
+                try{
+                   $result = $this->instructteurlesmodel->getSingle($Id);
+                }catch(PDOException $e){
+    
+                }
+                $data = [
+                    "info" => $result
+                ];
+              $this->view("instructeurles/update",$data);
+            }      
+        }
+        public function create($Naam = ""){
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $values = ["Naam", "Datum", "Tijd","Onderdeel"];
+                if(!$this->validate($values)){
+                Header("Location: " . URLROOT . "/todo/index/create-failed");
+                }
+    
+                $this->instructteurlesmodel->Naam = $this->sanitize($_POST["Naam"]);
+                $this->instructteurlesmodel->Datum = $this->sanitize($_POST["Datum"]);
+                $this->instructteurlesmodel->Tijd = $this->sanitize($_POST["Tijd"]);
+                $this->instructteurlesmodel->Onderdeel = $this->sanitize($_POST["Onderdeel"]);
+    
+                $id = $this->GebruikerModel->createinstructeur($_POST);
+                Header("Location: " . URLROOT . "/todo/index/create-succes");
+            }else{
+                try{
+                    $this->instructteurlesmodel->Naam = $Naam;
+                   $result = $this->instructteurlesmodel->getSingle();
+                }catch(PDOException $e){
+    
+                }
+                $data = [
+                    "info" => $result
+                ];
+              $this->view("instructeurles/create",$data);
+            }       
     }
 }

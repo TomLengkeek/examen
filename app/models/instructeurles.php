@@ -13,9 +13,9 @@ Class instructeurles{
 public function __construct(){
   $this->db = new Database();
 }
-// functie voor lessen van student gegevens op te halen.
-public function getAllopmerkleerlingen(){
-$this->db->query("SELECT leerling.*, lessen.* FROM `leerling` INNER JOIN `lessen` ON `leerling`.`Id` = `lessen`.`leerling`  AND `leerling`.`Id` = 3");
+// functie voor lessen van leerlingen op te halen.
+public function getAllleerlingen(){
+$this->db->query("SELECT leerling.*, lessen.* FROM `leerling` INNER JOIN `lessen` ON `leerling`.`Id` = `lessen`.`leerling`  AND `leerling`.`Id` ");
 // var_dump($this->db->resultSet());exit();
 return $this->db->resultSet();
 }
@@ -23,23 +23,36 @@ return $this->db->resultSet();
 // hij haalt een record op uit de database    
 public function getSingle($Id){
     //echo $Id;exit();
-$this->db->query("SELECT * FROM `lessen` INNER JOIN `opmerkingen` WHERE opmerkingen.Id =:Id");
-$this->db->bind(":Id", $Id);
+$this->db->query("SELECT * FROM `lessen` WHERE lessen.Id = :Onderdeel");
+$this->db->bind(":Onderdeel", $Id);
 //var_dump($this->db);exit();
 return $this->db->single();
 
 }
 
-// functie voor opmerking van een les te updaten.
-public function updateopmerking(){
-    $this->db->query("UPDATE `opmerkingen` 
-    SET Opmerking = :Opmerking, Id = :Id
-        WHERE Opmerking = :oldOpmerking");
-    $this->db->bind(":Id", $this->Id);
-    $this->db->bind(":Opmerking", $this->Opmerking);
-    $this->db->bind(":oldOpmerking", $this->oldOpmerking);
-    
+// functie voor opmerking van een onderdeel te updaten.
+public function updateonderdeel($post){
+    // var_dump($post);exit();
+    $this->db->query("UPDATE `lessen` 
+    SET Onderdeel = :Onderdeel WHERE Id = :Id");
+    $this->db->bind(":Id", $post["Id"]);
+    $this->db->bind(":Onderdeel", $post["Onderdeel"]);
+    // $this->db->bind(":oldOndereel", $this->oldOnderdeel);
+    // var_dump($this->db);exit();
     $this->db->execute();
 }
+
+public function createinstructeur($post){
+
+    $this->db->query("INSERT INTO `lessen` SET Naam = :Naam, Datum = :Datum, Tijd = :Tijd");
+    
+    $this->db->bind(':email', $post["email"], );
+    $this->db->bind(':voornaam', $post["voornaam"], );
+    $this->db->bind(':achternaam', $post["achternaam"], );
+  
+    $this->db->execute();
+
+}
+
 
 }

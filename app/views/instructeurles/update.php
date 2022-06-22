@@ -9,15 +9,19 @@
 
   <body>
       
-  <form action ="<?php URLROOT ?>/instructeurles/update" method="POST">
+  <form action ="<?php URLROOT ?>/instructeurlessen/update" method="POST">
   <div class="mb-3">
 
 <!-- Kolom voor Opmerking-->
-    <label for="exampleInputOpmerking" class="form-label">Opmerking</label>
-    <input type="text" class="form-control" id="Opmerking" aria-describedby="emailHelp" name="Opmerking" value="<?=$data["info"]->Onderdeel ?>" required> 
+    <label for="exampleInputOpmerking" class="form-label">Onderdeel</label>
+    <input type="text" class="form-control" id="Onderdeel" aria-describedby="emailHelp" name="Onderdeel" value="<?=$data["info"]->Onderdeel ?>" required> 
   </div>
+<!-- kolom voor Les -->
+  <!-- <label for="exampleInputLes" class="form-label">LesId</label>
+    <input type="text" class="form-control" id="Id" aria-describedby="emailHelp" name="Id" value="<?=$data["info"]->Id ?>" required> 
+  </div> -->
 
-  <input type="hidden" name="oldOpmerking" value="<?=$data["info"]->Opmerking ?>">
+  <input type="hidden" name="Id" value="<?=$data["info"]->Id ?>">
 
 <!--Button voor updaten -->
   <button type="submit" class="btn btn-primary">Submit</button>

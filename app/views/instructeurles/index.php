@@ -16,10 +16,10 @@ include("Navbar.php");
 <?php
 if(!empty($data["alert"]))
    echo $data["alert"];
-   header("Refresh: ; url=" . URLROOT. "/instructeurles/index");
+   header("Refresh: ; url=" . URLROOT. "/instructeurlessen/index");
 ?>
 <div class = "col-12">
- <a href="http://Examenopdracht/Actieveleerling/create" type= "button" style="float: right; margin-bottom : 20px;"class="btn btn-danger btn-lg btn-block"> Nieuwe record toevoegen</a><h1 style="margin-top : 20px; margin-bottom : 20px;">Overzicht van instructeur lesrooster</h1>
+ <a href="http://Examenopdracht//create" type= "button" style="float: right; margin-bottom : 20px;"class="btn btn-danger btn-lg btn-block"> Nieuwe record toevoegen</a><h1 style="margin-top : 20px; margin-bottom : 20px;">Overzicht van instructeur lesrooster</h1>
  
 </div>
 <!--de tabel van instructieurles  -->
@@ -30,6 +30,7 @@ if(!empty($data["alert"]))
       <th scope="col">Datum</th>
       <th scope="col">Tijd</th>
       <th scope="col">Onderwerp</th>
+      <th scope="col">Opmerkingen</th>
       <th scope="col"></th>
      
     </tr>
