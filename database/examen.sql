@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Gegenereerd op: 21 jun 2022 om 23:50
+-- Gegenereerd op: 22 jun 2022 om 21:05
 -- Serverversie: 5.7.31
 -- PHP-versie: 7.3.21
 
@@ -71,28 +71,81 @@ INSERT INTO `keuringen` (`datum`, `kosten`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `leerlingen`
+-- Tabelstructuur voor tabel `leerling`
 --
 
-DROP TABLE IF EXISTS `leerlingen`;
-CREATE TABLE IF NOT EXISTS `leerlingen` (
+DROP TABLE IF EXISTS `leerling`;
+CREATE TABLE IF NOT EXISTS `leerling` (
   `email` varchar(125) NOT NULL,
-  `rol` varchar(20) NOT NULL,
+  `rol` varchar(15) NOT NULL,
   `naam` varchar(50) NOT NULL,
-  `telefoonnummer` int(20) NOT NULL,
+  `telefoonnummer` int(10) NOT NULL,
   `mededeling` varchar(255) NOT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
+-- Gegevens worden geëxporteerd voor tabel `leerling`
+--
+
+INSERT INTO `leerling` (`email`, `rol`, `naam`, `telefoonnummer`, `mededeling`) VALUES
+('luuc@gmail.com', 'leerling', 'Luuc Stigter', 684759388, ''),
+('stan@gmail.com', 'leerling', 'Stan Stigter', 684938333, ''),
+('henk@gmail.com', 'leerling', 'Henk de Steen', 684938599, '');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `leerlingen`
+--
+
+DROP TABLE IF EXISTS `leerlingen`;
+CREATE TABLE IF NOT EXISTS `leerlingen` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `naam` varchar(50) NOT NULL,
+  `pakket` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_leerling_pakketten_idx` (`pakket`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
 -- Gegevens worden geëxporteerd voor tabel `leerlingen`
 --
 
-INSERT INTO `leerlingen` (`email`, `rol`, `naam`, `telefoonnummer`, `mededeling`) VALUES
-('luucstigter@gmail.com', 'leerling', 'Luuc Stigter', 683593733, ''),
-('arjan@gmail.com', 'leerling', 'Arjan de Ruijter ', 684639300, ''),
-('stan@gmail.com', 'leerling', 'stan stigter', 684849333, ''),
-('rick@gmail.com', 'leerling', 'Rick Stigter', 684933443, '');
+INSERT INTO `leerlingen` (`id`, `naam`, `pakket`) VALUES
+(3, 'Konijn', 'Pakket 1'),
+(4, 'Slavink', 'Pakket 2'),
+(6, 'Otto', 'Pakket 1');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `lessen`
+--
+
+DROP TABLE IF EXISTS `lessen`;
+CREATE TABLE IF NOT EXISTS `lessen` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `datum` date NOT NULL,
+  `leerling` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_lessen_leerlingen_idx` (`leerling`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `lessen`
+--
+
+INSERT INTO `lessen` (`id`, `datum`, `leerling`) VALUES
+(45, '2022-06-20', 3),
+(46, '2022-06-20', 6),
+(47, '2022-06-21', 4),
+(48, '2022-06-21', 6),
+(49, '2022-06-22', 3),
+(50, '2022-08-22', 6),
+(51, '2022-08-22', 3),
+(52, '2022-10-22', 4),
+(53, '2022-11-22', 3);
 
 -- --------------------------------------------------------
 
@@ -116,6 +169,32 @@ INSERT INTO `onderhoudsbeurten` (`datum`, `kosten`) VALUES
 ('2022-06-02', 140),
 ('2022-06-15', 260),
 ('2022-06-22', 300);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `pakketten`
+--
+
+DROP TABLE IF EXISTS `pakketten`;
+CREATE TABLE IF NOT EXISTS `pakketten` (
+  `naam` varchar(50) NOT NULL,
+  `prijs` int(10) NOT NULL,
+  `aantalLessen` int(3) NOT NULL,
+  `cbrExamen` int(2) NOT NULL,
+  `betaalTermijnen` varchar(20) NOT NULL,
+  PRIMARY KEY (`naam`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `pakketten`
+--
+
+INSERT INTO `pakketten` (`naam`, `prijs`, `aantalLessen`, `cbrExamen`, `betaalTermijnen`) VALUES
+('Pakket 1', 400, 5, 1, '2 X 220,00'),
+('Pakket 2', 590, 10, 1, '2 X 310,00'),
+('Pakket 3', 735, 15, 1, '3 X 235,00'),
+('Pakket 4', 890, 20, 1, '4 X 235,00');
 
 -- --------------------------------------------------------
 
@@ -149,6 +228,18 @@ INSERT INTO `wagenpark` (`kenteken`, `merk`, `type`, `kilometerstand`, `datumKeu
 --
 -- Beperkingen voor geëxporteerde tabellen
 --
+
+--
+-- Beperkingen voor tabel `leerlingen`
+--
+ALTER TABLE `leerlingen`
+  ADD CONSTRAINT `FK_leerling_pakketten` FOREIGN KEY (`pakket`) REFERENCES `pakketten` (`naam`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Beperkingen voor tabel `lessen`
+--
+ALTER TABLE `lessen`
+  ADD CONSTRAINT `FK_lessen_leerlingen` FOREIGN KEY (`leerling`) REFERENCES `leerlingen` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Beperkingen voor tabel `wagenpark`
