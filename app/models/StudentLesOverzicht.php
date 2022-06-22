@@ -58,4 +58,13 @@ class StudentLesOverzicht
         // execute sql statemants/ bind
         $this->db->execute();
     }
+
+
+    public function getReden()
+    {
+        $this->db->query("SELECT * FROM annuleerlessen");
+        $result = $this->db->resultSet();
+
+        return $result;
+    }
 }

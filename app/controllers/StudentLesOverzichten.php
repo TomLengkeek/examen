@@ -49,6 +49,9 @@ class StudentLesOverzichten extends Controller
             <td>
             <a href='" . URLROOT . "/StudentLesOverzichten/deleteAfspraak/$value->id'><i class='fa fa-trash'>delete</i></a>
             </td>
+             <td>
+            <a href='" . URLROOT . "/StudentLesOverzichten/aanpasAfspraak/$value->id'><i class=''>aanpassen</i></a>
+            </td>
             <tr>
             ";
         }
@@ -63,6 +66,25 @@ class StudentLesOverzichten extends Controller
 
         // this view om de invoeren/index pagina te laden
         $this->view('studentOverzicht/index', $data);
+    }
+
+
+
+    public function aanpasAfspraak()
+    {
+        $row = $this->studentoverzichtmodel->getSingleAfspraak();
+
+        $this->view('studentOverzicht/pasaan');
+
+
+
+
+        $data = [
+            'title' => "<h1>Update artikeloverzicht</h1>",
+            'row' => $row,
+            'records' => $records
+
+        ];
     }
 
 
@@ -85,5 +107,19 @@ class StudentLesOverzichten extends Controller
         } catch (PDOException $e) {
             header("Location: " . URLROOT . "/StudentLesOverzichten/index/delete-les-failed");
         }
+    }
+
+
+
+
+
+    public function redenSelector($info = '')
+    {
+        $records = "";
+        foreach ($this->model("StudentLesOverzicht")->getMedewerker() as $record) {
+            $selected = ($info == $record->klassen) ? "selected" : ""; //check if the category is the one we have selected
+            $records .= "<option value = '" . $record->klassen . "'" . $selected . ">" . $record->klassen .  "</option>";
+        }
+        return $records;
     }
 }
