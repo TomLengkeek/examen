@@ -7,6 +7,7 @@ class Lessen extends Controller {
     {
         try 
         {    
+            //vertelt welke model het moet gebruiken
             $this->lesModel = $this->model('Les');
             //echo "construct met de model gelukt";
         } 
@@ -18,6 +19,7 @@ class Lessen extends Controller {
         }
     }
 
+    //functie om leerling gegevens op te halen uit de model en mee te geven aan de vieuw
     public function index($message = "")
     {
         //message switch case voor gepaste error messages (checkt eerst of message niet empty is)
@@ -73,7 +75,7 @@ class Lessen extends Controller {
         }
     }
 
-    //functie om alle leerlinglessen op te halen
+    //functie om leerling lessen op te halen uit de model en mee te geven aan de vieuw
     public function getLeerlingLessen($message = "")
     {
         //message switch case voor gepaste error messages (checkt eerst of message niet empty is)
@@ -110,6 +112,7 @@ class Lessen extends Controller {
                   </div>';
             }
         
+            //de data wat opgehaald is word in een grate data array gezet
             $data = [
                 'title' => "lessen",
                 'tbody' => $tbody,
@@ -126,6 +129,7 @@ class Lessen extends Controller {
         }
     }
 
+    //functie om pakket info op te halen uit de model en mee te geven aan de vieuw
     public function pakketInformatie($message = "")
     {
         //message switch case voor gepaste error messages (checkt eerst of message niet empty is)
@@ -141,9 +145,11 @@ class Lessen extends Controller {
         }
 
         try {
+            //zegt welke functie de model moet gebruiken
             $lessen = $this->lesModel->getPakketInfo();
             // var_dump($wagenparken);exit();
 
+            //zegt welke functie de model moet gebruiken
             $tbody = "";
             foreach ($lessen as $value) {
                 $tbody .= "<tr>
@@ -163,12 +169,14 @@ class Lessen extends Controller {
                   </div>';
             }
         
+            //de data wat opgehaald is word in een grate data array gezet
             $data = [
                 'title' => "lessen",
                 'tbody' => $tbody,
                 'alert' => $alert
             ];
     
+            //als alles gelukt is gaat het naar de vieuw en geeft het de data mee aan de vieuw
             $this->view("lessen/pakketten", $data);
 
         } catch (PDOEXception $e) {
