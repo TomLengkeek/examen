@@ -16,7 +16,8 @@
     <label for="exampleInputOpmerking" class="form-label">Onderdeel</label>
     <input type="text" class="form-control" id="Onderdeel" aria-describedby="emailHelp" name="Onderdeel" value="<?=$data["info"]->Onderdeel ?>" required> 
   </div>
-
+ 
+  
 <!-- een onzichtbare tag van Id die meegegeven word bij Onderdeel -->
   <input type="hidden" name="Id" value="<?=$data["info"]->Id ?>">
 
